@@ -1,0 +1,19 @@
+package fr.rage.lafie.table.games.points.sheet.data.database.converter
+
+import androidx.room.TypeConverter
+import java.util.UUID
+
+class Converters {
+
+    @TypeConverter
+    fun fromUUID(value: String?): UUID? {
+        return value?.let { uuid ->
+            UUID.fromString(uuid)
+        }
+    }
+
+    @TypeConverter
+    fun toUUID(uuid: UUID?): String? {
+        return uuid?.toString()
+    }
+}

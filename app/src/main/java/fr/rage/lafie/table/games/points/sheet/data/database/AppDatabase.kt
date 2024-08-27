@@ -1,0 +1,19 @@
+package fr.rage.lafie.table.games.points.sheet.data.database
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import fr.rage.lafie.table.games.points.sheet.data.database.converter.Converters
+import fr.rage.lafie.table.games.points.sheet.data.database.dao.PlayerDao
+import fr.rage.lafie.table.games.points.sheet.data.database.entity.PlayerEntity
+
+@Database(
+    entities = [
+        PlayerEntity::class,
+    ],
+    version = 1,
+)
+@TypeConverters(Converters::class)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun getPlayerDao(): PlayerDao
+}
