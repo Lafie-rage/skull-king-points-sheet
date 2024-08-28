@@ -12,7 +12,7 @@ activityCompose = "1.9.1"
 composeBom = "2024.08.00"
 androidx-ui-navigation = "2.8.0-rc01"
 # Koin
-koin = "3.5.6"
+koin = "4.0.0-RC1"
 koin-annotations = "1.4.0-RC4"
 # Room
 room = "2.6.1"
@@ -36,6 +36,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 # Koin
 koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin-annotations" }
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koin-annotations" }
 # Room
 room-core = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -46,7 +47,7 @@ serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization
 
 [bundles]
 androidx-ui = ["androidx-ui-core", "androidx-ui-navigation", "androidx-ui-graphics", "androidx-ui-tooling", "androidx-ui-tooling-preview", "androidx-ui-test-manifest", "androidx-material3", "androidx-activity-compose", "androidx-lifecycle-runtime-ktx"]
-koin = ["koin-annotations", "koin-compose"]
+koin = ["koin-annotations", "koin-compose-viewmodel", "koin-compose"]
 room = ["room-core", "room-ktx"]
 
 [plugins]

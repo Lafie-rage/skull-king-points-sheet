@@ -12,6 +12,7 @@ import fr.rage.lafie.table.games.points.sheet.data.database.entity.PlayerEntity
         PlayerEntity::class,
     ],
     version = 1,
+    exportSchema = false,
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

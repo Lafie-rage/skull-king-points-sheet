@@ -10,7 +10,7 @@ import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
 
 @KoinViewModel
-class ChoosePlayerViewModel(
+class   ChoosePlayerViewModel(
     private val useCase: GetMatchPlayerListUseCase,
 ) : ViewModel() {
 
