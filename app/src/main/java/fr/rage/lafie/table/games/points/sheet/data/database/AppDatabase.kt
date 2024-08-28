@@ -16,5 +16,6 @@ import fr.rage.lafie.table.games.points.sheet.data.database.entity.PlayerEntity
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
+
     abstract fun getPlayerDao(): PlayerDao
 }
