@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Table Games Points Sheet</string>
+    <string name="navigate_back">Navigate back</string>
+    <string name="unable_to_load_data">An error occurred while trying to retrieve data</string>
 </resources>

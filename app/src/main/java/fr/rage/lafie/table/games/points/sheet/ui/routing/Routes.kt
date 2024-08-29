@@ -2,6 +2,8 @@ package fr.rage.lafie.table.games.points.sheet.ui.routing
 
 import kotlinx.serialization.Serializable
 
+// FIXME Once Compose navigation safe args library supports parameters annotated with @Serializable(with=...), migrate Strings to UUIDs
+
 @Serializable
 object Home
 

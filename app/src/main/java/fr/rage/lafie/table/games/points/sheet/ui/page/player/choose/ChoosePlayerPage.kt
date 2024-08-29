@@ -19,6 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rage.lafie.table.games.points.sheet.ui.component.ChoosePlayerButton
 import fr.rage.lafie.table.games.points.sheet.ui.routing.ChoosePlayerRoute
 import fr.rage.lafie.table.games.points.sheet.ui.theme.TableGamesPointsSheetTheme
+import fr.rage.lafie.table.games.points.sheet.utils.process
 import org.koin.androidx.compose.koinViewModel
 import java.util.UUID
 
@@ -40,7 +41,12 @@ fun ChoosePlayerPage(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            PlayerList(players, onNavigateToPlayer)
+            players.process(onSuccess = {
+                PlayerList(
+                    players = it,
+                    onNavigateToPlayer = onNavigateToPlayer
+                )
+            })
         }
     }
 }

@@ -9,11 +9,11 @@ fun PlayerEntity.toModel() = Player(
     name = name,
 )
 
-fun List<PlayerEntity>.toModel() = this.map(PlayerEntity::toModel)
+fun List<PlayerEntity>.toModel(): List<Player> = this.map(PlayerEntity::toModel)
 
 fun Player.toState() = PlayerState(
     id = id,
     name = name,
 )
 
-fun List<Player>.toState() = this.map(Player::toState)
+fun List<Player>.toState(): List<PlayerState> = this.map(Player::toState)

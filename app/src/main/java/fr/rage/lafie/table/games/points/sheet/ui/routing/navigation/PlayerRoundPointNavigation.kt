@@ -5,18 +5,19 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import fr.rage.lafie.table.games.points.sheet.ui.page.player.round.point.PlayerRoundPointPage
-import fr.rage.lafie.table.games.points.sheet.ui.routing.ChoosePlayerRoute
 import fr.rage.lafie.table.games.points.sheet.ui.routing.PlayerRoundPointRoute
 import java.util.UUID
 
-fun NavGraphBuilder.playerRoundPointNavigation() {
+fun NavGraphBuilder.playerRoundPointNavigation(
+    onNavigateBack: () -> Unit,
+) {
     composable<PlayerRoundPointRoute> { backEntry ->
         PlayerRoundPointPage(
             routeParams = backEntry.toRoute(),
+            onNavigateBack = onNavigateBack,
         )
     }
 }
-
 
 fun NavController.navigateToPlayerRoundPoints(
     playerId: UUID,
