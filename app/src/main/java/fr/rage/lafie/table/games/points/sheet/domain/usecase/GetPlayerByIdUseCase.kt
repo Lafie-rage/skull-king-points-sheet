@@ -14,6 +14,6 @@ class GetPlayerByIdUseCase(
     private val playerRepository: PlayerRepository,
 ) {
 
-    operator fun invoke(playerId: UUID): Result<PlayerState> =
+    suspend operator fun invoke(playerId: UUID): Result<PlayerState> =
         playerRepository.getById(playerId).map(Player::toState)
 }

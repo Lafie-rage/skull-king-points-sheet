@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.2"
+agp = "8.6.0"
 kotlin = "2.0.20"
 ksp = "2.0.20-1.0.24"
 serialization = "1.7.1"
@@ -9,6 +9,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
+compose = "1.7.0-rc01"
 composeBom = "2024.08.00"
 androidx-ui-navigation = "2.8.0-rc01"
 # Koin
@@ -25,8 +26,9 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-ui-core = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-ui-navigation" }
+androidx-ui-core = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
@@ -46,7 +48,7 @@ room-complier = { group = "androidx.room", name = "room-compiler", version.ref =
 serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
 
 [bundles]
-androidx-ui = ["androidx-ui-core", "androidx-ui-navigation", "androidx-ui-graphics", "androidx-ui-tooling", "androidx-ui-tooling-preview", "androidx-ui-test-manifest", "androidx-material3", "androidx-activity-compose", "androidx-lifecycle-runtime-ktx"]
+androidx-ui = ["androidx-ui-core", "androidx-ui-navigation", "androidx-ui-graphics", "androidx-ui-tooling", "androidx-ui-tooling-preview", "androidx-ui-test-manifest", "androidx-material3", "androidx-activity-compose", "androidx-lifecycle-runtime-ktx", "androidx-compose-icons-extended"]
 koin = ["koin-annotations", "koin-compose-viewmodel", "koin-compose"]
 room = ["room-core", "room-ktx"]
 

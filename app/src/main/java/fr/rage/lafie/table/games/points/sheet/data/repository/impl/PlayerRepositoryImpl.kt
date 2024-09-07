@@ -16,7 +16,7 @@ class PlayerRepositoryImpl(
 ) : PlayerRepository {
 
     // region GET
-    override fun getById(id: UUID): Result<Player> =
+    override suspend fun getById(id: UUID): Result<Player> =
         Result.Success(dao.getById(id).toModel())
 
     override fun getAllByMatchId(matchId: UUID): Flow<Result<List<Player>>> =

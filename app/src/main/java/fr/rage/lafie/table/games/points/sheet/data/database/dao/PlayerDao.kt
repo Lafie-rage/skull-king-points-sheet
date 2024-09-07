@@ -11,7 +11,7 @@ interface PlayerDao {
 
     // region GET
     @Query("SELECT * FROM player WHERE id = :id")
-    fun getById(id: UUID): PlayerEntity
+    suspend fun getById(id: UUID): PlayerEntity
 
     @Query("SELECT * FROM player WHERE matchId = :matchId")
     fun getAllByMatchId(matchId: UUID): Flow<List<PlayerEntity>>

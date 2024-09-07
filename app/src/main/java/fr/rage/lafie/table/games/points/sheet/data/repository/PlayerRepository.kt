@@ -10,6 +10,6 @@ interface PlayerRepository {
     // region GET
     fun getAllByMatchId(matchId: UUID): Flow<Result<List<Player>>>
 
-    fun getById(id: UUID): Result<Player>
+    suspend fun getById(id: UUID): Result<Player>
     // endregion
 }

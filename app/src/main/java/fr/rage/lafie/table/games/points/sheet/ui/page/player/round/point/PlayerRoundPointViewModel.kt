@@ -5,9 +5,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.GetPlayerByIdUseCase
 import fr.rage.lafie.table.games.points.sheet.ui.page.player.choose.PlayerState
 import fr.rage.lafie.table.games.points.sheet.utils.Result
+import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
 
@@ -24,7 +26,9 @@ class PlayerRoundPointViewModel(
         get() = _player
 
     fun setPlayerId(playerId: UUID) {
-        _player.value = useCase.invoke(playerId)
+        viewModelScope.launch {
+            _player.value = useCase.invoke(playerId)
+        }
     }
 
     fun addPoints(value: Int) {

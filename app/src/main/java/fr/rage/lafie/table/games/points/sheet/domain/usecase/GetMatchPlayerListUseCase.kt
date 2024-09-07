@@ -20,5 +20,4 @@ class GetMatchPlayerListUseCase(
         playerRepository.getAllByMatchId(matchId).map {
             it.map(List<Player>::toState)
         }
-
 }

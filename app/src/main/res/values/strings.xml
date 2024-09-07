@@ -2,4 +2,7 @@
     <string name="app_name">Table Games Points Sheet</string>
     <string name="navigate_back">Navigate back</string>
     <string name="unable_to_load_data">An error occurred while trying to retrieve data</string>
+    <string name="display_action_menu">Display action menu</string>
+    <string name="end_match">End match</string>
+    <string name="see_match_recap">See match recap</string>
 </resources>
