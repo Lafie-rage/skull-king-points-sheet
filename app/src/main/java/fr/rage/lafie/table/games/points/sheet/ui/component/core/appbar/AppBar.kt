@@ -1,4 +1,4 @@
-package fr.rage.lafie.table.games.points.sheet.ui.component
+package fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -22,8 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import fr.rage.lafie.table.games.points.sheet.R
-import fr.rage.lafie.table.games.points.sheet.ui.component.menu.EndMatchMenuAction
-import fr.rage.lafie.table.games.points.sheet.ui.component.menu.MatchRecapMenuAction
+import fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar.menu.EndMatchMenuAction
+import fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar.menu.MatchRecapMenuAction
 import fr.rage.lafie.table.games.points.sheet.ui.theme.TableGamesPointsSheetTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

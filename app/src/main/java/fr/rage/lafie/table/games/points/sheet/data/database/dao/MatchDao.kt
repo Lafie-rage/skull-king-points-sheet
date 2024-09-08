@@ -4,24 +4,22 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import fr.rage.lafie.table.games.points.sheet.data.database.entity.PlayerEntity
+import fr.rage.lafie.table.games.points.sheet.data.database.entity.MatchEntity
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 
 @Dao
-interface PlayerDao {
-
+interface MatchDao {
     // region INSERT
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(players: List<PlayerEntity>)
+    suspend fun upsert(player: MatchEntity)
     // endregion
 
     // region SELECT
-    @Query("SELECT * FROM player WHERE id = :id")
-    suspend fun getById(id: UUID): PlayerEntity?
+    @Query("SELECT * FROM `match` WHERE id = :id")
+    suspend fun getById(id: UUID): MatchEntity?
 
-    @Query("SELECT * FROM player WHERE matchId = :matchId")
-    fun getAllByMatchId(matchId: UUID): Flow<List<PlayerEntity>>
+    @Query("SELECT * FROM `match` WHERE gameId = :gameId")
+    fun getAllByGameId(gameId: UUID): Flow<List<MatchEntity>>
     // endregion
-
 }

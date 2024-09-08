@@ -5,4 +5,7 @@
     <string name="display_action_menu">Display action menu</string>
     <string name="end_match">End match</string>
     <string name="see_match_recap">See match recap</string>
+    <string name="validate">Validate</string>
+    <string name="increase_points">Increase points</string>
+    <string name="decrease_points">Decrease points</string>
 </resources>

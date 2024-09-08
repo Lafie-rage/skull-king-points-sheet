@@ -9,5 +9,5 @@ data class PlayerRoundAndPointEntity(
         parentColumn = "id",
         entityColumn = "playerId",
     )
-    val points: PlayerHasPointDuringRoundEntity,
+    val points: PlayerPointsEntity,
 )

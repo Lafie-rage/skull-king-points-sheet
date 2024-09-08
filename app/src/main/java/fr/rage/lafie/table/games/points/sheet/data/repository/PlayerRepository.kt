@@ -6,6 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 
 interface PlayerRepository {
+    // region ADD
+    suspend fun associateToMatch(players: List<Player>, matchId: UUID)
+    // endregion
 
     // region GET
     fun getAllByMatchId(matchId: UUID): Flow<Result<List<Player>>>

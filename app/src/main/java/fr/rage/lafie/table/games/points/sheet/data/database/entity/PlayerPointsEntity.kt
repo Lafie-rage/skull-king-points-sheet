@@ -2,21 +2,28 @@ package fr.rage.lafie.table.games.points.sheet.data.database.entity
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.util.UUID
 
 @Entity(
+    tableName = "player_points",
     foreignKeys = [
         ForeignKey(
-            entity = GameEntity::class,
+            entity = PlayerEntity::class,
             parentColumns = ["id"],
-            childColumns = ["gameId"],
+            childColumns = ["playerId"],
             onDelete = ForeignKey.CASCADE,
             onUpdate = ForeignKey.CASCADE,
         ),
     ],
+    indices = [
+        Index(value = ["playerId"]),
+    ]
 )
-data class Match(
+data class PlayerPointsEntity(
     @PrimaryKey val id: UUID,
-    val gameId: UUID,
+    val playerId: UUID,
+    val roundIndex: Int,
+    val points: Long,
 )

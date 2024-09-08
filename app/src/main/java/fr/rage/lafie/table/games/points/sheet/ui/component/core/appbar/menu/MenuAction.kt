@@ -1,4 +1,4 @@
-package fr.rage.lafie.table.games.points.sheet.ui.component.menu
+package fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar.menu
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

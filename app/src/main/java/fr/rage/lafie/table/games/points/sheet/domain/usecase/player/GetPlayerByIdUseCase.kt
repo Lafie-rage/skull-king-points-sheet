@@ -1,4 +1,4 @@
-package fr.rage.lafie.table.games.points.sheet.domain.usecase
+package fr.rage.lafie.table.games.points.sheet.domain.usecase.player
 
 import fr.rage.lafie.table.games.points.sheet.data.model.Player
 import fr.rage.lafie.table.games.points.sheet.data.repository.PlayerRepository

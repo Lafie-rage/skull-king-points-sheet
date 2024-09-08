@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import fr.rage.lafie.table.games.points.sheet.domain.usecase.GetMatchPlayerListUseCase
+import fr.rage.lafie.table.games.points.sheet.domain.usecase.match.GetMatchPlayerListUseCase
 import fr.rage.lafie.table.games.points.sheet.ui.routing.ChoosePlayerRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +17,7 @@ import java.util.UUID
 
 @KoinViewModel
 class ChoosePlayerViewModel(
-    saveStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val useCase: GetMatchPlayerListUseCase,
 ) : ViewModel() {
 
@@ -25,7 +25,7 @@ class ChoosePlayerViewModel(
     val players: StateFlow<Result<List<PlayerState>>>
         get() = _players
 
-    private val routeParams: ChoosePlayerRoute = saveStateHandle.toRoute()
+    private val routeParams: ChoosePlayerRoute = savedStateHandle.toRoute()
 
     init {
         viewModelScope.launch {
@@ -33,9 +33,5 @@ class ChoosePlayerViewModel(
                 .filterNotNull()
                 .first()
         }
-    }
-
-    fun setMatchId(matchId: UUID) {
-
     }
 }

@@ -2,44 +2,71 @@ package fr.rage.lafie.table.games.points.sheet.ui.page.player.round.point
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import fr.rage.lafie.table.games.points.sheet.domain.usecase.GetPlayerByIdUseCase
+import androidx.navigation.toRoute
+import fr.rage.lafie.table.games.points.sheet.domain.usecase.player.GetPlayerByIdUseCase
+import fr.rage.lafie.table.games.points.sheet.domain.usecase.points.GetPlayerPointsByPlayerIdUseCase
+import fr.rage.lafie.table.games.points.sheet.domain.usecase.points.SavePlayerPointsUseCase
 import fr.rage.lafie.table.games.points.sheet.ui.page.player.choose.PlayerState
+import fr.rage.lafie.table.games.points.sheet.ui.routing.PlayerRoundPointRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
+import fr.rage.lafie.table.games.points.sheet.utils.ifSuccess
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
 
 @KoinViewModel
 class PlayerRoundPointViewModel(
-    private val useCase: GetPlayerByIdUseCase,
+    savedStateHandle: SavedStateHandle,
+    private val getPlayerUseCase: GetPlayerByIdUseCase,
+    private val getPlayerPointsUseCase: GetPlayerPointsByPlayerIdUseCase,
+    private val savePlayerPointsUseCase: SavePlayerPointsUseCase,
 ) : ViewModel() {
-    private val _points: MutableState<Int> = mutableIntStateOf(0)
-    val points: State<Int>
+    private val state by lazy {
+        mutableStateOf(
+            PlayerPointsState(
+                id = UUID.randomUUID(),
+                playerId = UUID.fromString(routeParams.playerId),
+                roundIndex = routeParams.roundIndex,
+                points = 0,
+            )
+        )
+    }
+
+    private val _points: MutableState<Long> = mutableLongStateOf(0)
+    val points: State<Long>
         get() = _points
 
     private val _player: MutableState<Result<PlayerState>> = mutableStateOf(Result.Loading)
     val player: State<Result<PlayerState>>
         get() = _player
 
-    fun setPlayerId(playerId: UUID) {
+    private val routeParams: PlayerRoundPointRoute = savedStateHandle.toRoute()
+
+    init {
         viewModelScope.launch {
-            _player.value = useCase.invoke(playerId)
+            val playerId = UUID.fromString(routeParams.playerId)
+            _player.value = getPlayerUseCase(playerId)
+
+            getPlayerPointsUseCase(playerId).ifSuccess {
+                state.value = it
+                _points.value = it.points
+            }
         }
     }
 
-    fun addPoints(value: Int) {
-        _points.value += value
-    }
-
-    fun removePoints(value: Int) {
-        _points.value -= value
-    }
-
-    fun setPoints(value: Int) {
+    fun setPoints(value: Long) {
         _points.value = value
+        state.value = state.value.copy(points = value)
+    }
+
+    fun save() {
+        viewModelScope.launch {
+            savePlayerPointsUseCase(state.value)
+        }
     }
 }

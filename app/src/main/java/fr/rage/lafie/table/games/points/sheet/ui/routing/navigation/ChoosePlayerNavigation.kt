@@ -16,7 +16,6 @@ fun NavGraphBuilder.choosePlayerNavigation(
     composable<ChoosePlayerRoute> { backEntry ->
         val routeParams: ChoosePlayerRoute = backEntry.toRoute()
         ChoosePlayerPage(
-            routeParams = routeParams,
             onNavigateToPlayer = { player ->
                 onNavigateToPlayer(player, routeParams.roundIndex)
             },

@@ -1,8 +1,11 @@
 package fr.rage.lafie.table.games.points.sheet.data.repository.impl
 
 import fr.rage.lafie.table.games.points.sheet.data.database.dao.PlayerDao
+import fr.rage.lafie.table.games.points.sheet.data.database.entity.PlayerEntity
+import fr.rage.lafie.table.games.points.sheet.data.exception.EntityNotFoundById
 import fr.rage.lafie.table.games.points.sheet.data.model.Player
 import fr.rage.lafie.table.games.points.sheet.data.repository.PlayerRepository
+import fr.rage.lafie.table.games.points.sheet.domain.mapper.toEntity
 import fr.rage.lafie.table.games.points.sheet.domain.mapper.toModel
 import fr.rage.lafie.table.games.points.sheet.utils.Result
 import kotlinx.coroutines.flow.Flow
@@ -15,14 +18,24 @@ class PlayerRepositoryImpl(
     private val dao: PlayerDao,
 ) : PlayerRepository {
 
-    // region GET
-    override suspend fun getById(id: UUID): Result<Player> =
-        Result.Success(dao.getById(id).toModel())
+    // region ADD
+    override suspend fun associateToMatch(
+        players: List<Player>,
+        matchId: UUID
+    ) {
+        return dao.upsert(players.toEntity(matchId))
+    }
+    // endregion
 
+    // region GET
     override fun getAllByMatchId(matchId: UUID): Flow<Result<List<Player>>> =
         dao.getAllByMatchId(matchId).map {
             Result.Success(it.toModel())
         }
+
+    override suspend fun getById(id: UUID): Result<Player> = dao.getById(id)?.let {
+        Result.Success(it.toModel())
+    } ?: Result.Error(EntityNotFoundById(PlayerEntity::class, id))
     // endregion
 
 }

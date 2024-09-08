@@ -10,30 +10,23 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rage.lafie.table.games.points.sheet.ui.component.ChoosePlayerButton
-import fr.rage.lafie.table.games.points.sheet.ui.routing.ChoosePlayerRoute
 import fr.rage.lafie.table.games.points.sheet.ui.theme.TableGamesPointsSheetTheme
-import fr.rage.lafie.table.games.points.sheet.utils.process
+import fr.rage.lafie.table.games.points.sheet.utils.MapToComposable
 import org.koin.androidx.compose.koinViewModel
 import java.util.UUID
 
 @Composable
 fun ChoosePlayerPage(
-    routeParams: ChoosePlayerRoute,
     onNavigateToPlayer: (PlayerState) -> Unit,
     viewModel: ChoosePlayerViewModel = koinViewModel(),
 ) {
     val players by viewModel.players.collectAsStateWithLifecycle()
-
-    LaunchedEffect(Unit) {
-        viewModel.setMatchId(matchId = UUID.fromString(routeParams.matchId))
-    }
 
     Scaffold { innerPadding ->
         Box(
@@ -41,7 +34,7 @@ fun ChoosePlayerPage(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            players.process(onSuccess = {
+            players.MapToComposable(onSuccess = {
                 PlayerList(
                     players = it,
                     onNavigateToPlayer = onNavigateToPlayer
