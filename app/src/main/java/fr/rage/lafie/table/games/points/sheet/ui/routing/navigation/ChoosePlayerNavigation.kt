@@ -12,6 +12,7 @@ import java.util.UUID
 
 fun NavGraphBuilder.choosePlayerNavigation(
     onNavigateToPlayer: (PlayerState, Int) -> Unit,
+    onNavigateBack: () -> Unit,
 ) {
     composable<ChoosePlayerRoute> { backEntry ->
         val routeParams: ChoosePlayerRoute = backEntry.toRoute()
@@ -19,6 +20,7 @@ fun NavGraphBuilder.choosePlayerNavigation(
             onNavigateToPlayer = { player ->
                 onNavigateToPlayer(player, routeParams.roundIndex)
             },
+            onNavigateBack = onNavigateBack,
         )
     }
 }

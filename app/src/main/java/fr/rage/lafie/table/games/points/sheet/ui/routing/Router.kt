@@ -19,10 +19,11 @@ fun Router() {
         choosePlayerNavigation(
             onNavigateToPlayer = { player, roundIndex ->
                 navController.navigateToPlayerRoundPoints(player.id, roundIndex)
-            }
+            },
+            onNavigateBack = navController::popBackStack,
         )
         playerRoundPointNavigation(
-            onNavigateBack = navController::popBackStack
+            onNavigateBack = navController::popBackStack,
         )
     }
 

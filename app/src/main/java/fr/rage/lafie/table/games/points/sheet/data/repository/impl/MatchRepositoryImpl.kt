@@ -18,8 +18,8 @@ class MatchRepositoryImpl(
     private val dao: MatchDao,
 ) : MatchRepository {
     // region ADD
-    override suspend fun create(match: Match, gameId: UUID): Result<Match> {
-        dao.upsert(match.toEntity(gameId))
+    override suspend fun create(match: Match): Result<Match> {
+        dao.upsert(match.toEntity())
         return getById(match.id)
     }
     // endregion

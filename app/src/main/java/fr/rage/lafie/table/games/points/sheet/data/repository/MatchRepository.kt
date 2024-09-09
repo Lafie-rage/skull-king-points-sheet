@@ -7,7 +7,7 @@ import java.util.UUID
 
 interface MatchRepository {
     // region ADD
-    suspend fun create(match: Match, gameId: UUID): Result<Match>
+    suspend fun create(match: Match): Result<Match>
     // endregion
 
     // region GET

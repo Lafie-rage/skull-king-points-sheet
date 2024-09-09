@@ -26,7 +26,7 @@ data class DefinePlayers(
 )
 
 @Serializable
-data class Rounds(
+data class ChooseRound(
     val matchId: String,
 )
 

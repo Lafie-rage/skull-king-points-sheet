@@ -25,7 +25,6 @@ import fr.rage.lafie.table.games.points.sheet.R
 import fr.rage.lafie.table.games.points.sheet.ui.component.PlayerPointKeyboard
 import fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.table.games.points.sheet.ui.page.player.choose.PlayerState
-import fr.rage.lafie.table.games.points.sheet.ui.routing.PlayerRoundPointRoute
 import fr.rage.lafie.table.games.points.sheet.ui.theme.TableGamesPointsSheetTheme
 import fr.rage.lafie.table.games.points.sheet.utils.MapToComposable
 import org.koin.compose.viewmodel.koinViewModel
@@ -33,7 +32,6 @@ import java.util.UUID
 
 @Composable
 fun PlayerRoundPointPage(
-    routeParams: PlayerRoundPointRoute,
     onNavigateBack: () -> Unit,
     viewModel: PlayerRoundPointViewModel = koinViewModel(),
 ) {

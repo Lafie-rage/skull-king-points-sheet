@@ -68,10 +68,10 @@ class GetMatchPlayerListUseCase(
                 matchRepository.create(
                     match = Match(
                         id = matchId,
+                        gameId = gameId,
                         name = "Match 1",
                         roundCounter = 1,
                     ),
-                    gameId = gameId,
                 )
             }
         }

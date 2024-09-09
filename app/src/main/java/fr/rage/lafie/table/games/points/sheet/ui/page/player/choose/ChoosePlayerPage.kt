@@ -15,7 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import fr.rage.lafie.table.games.points.sheet.ui.component.ChoosePlayerButton
+import fr.rage.lafie.table.games.points.sheet.ui.component.ChooseItemButton
+import fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.table.games.points.sheet.ui.theme.TableGamesPointsSheetTheme
 import fr.rage.lafie.table.games.points.sheet.utils.MapToComposable
 import org.koin.androidx.compose.koinViewModel
@@ -24,22 +25,42 @@ import java.util.UUID
 @Composable
 fun ChoosePlayerPage(
     onNavigateToPlayer: (PlayerState) -> Unit,
+    onNavigateBack: () -> Unit,
     viewModel: ChoosePlayerViewModel = koinViewModel(),
 ) {
-    val players by viewModel.players.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
-    Scaffold { innerPadding ->
+    state.MapToComposable(onSuccess = {
+        Page(
+            title = it.title,
+            players = it.players,
+            onNavigateToPlayer = onNavigateToPlayer,
+            onNavigateBack = onNavigateBack,
+        )
+    })
+}
+
+@Composable
+private fun Page(
+    title: String,
+    players: List<PlayerState>,
+    onNavigateToPlayer: (PlayerState) -> Unit,
+    onNavigateBack: () -> Unit,
+) {
+    Scaffold(topBar = {
+        AppBar(
+            title = title,
+            onNavigateBack = onNavigateBack,
+        )
+    }) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            players.MapToComposable(onSuccess = {
-                PlayerList(
-                    players = it,
-                    onNavigateToPlayer = onNavigateToPlayer
-                )
-            })
+            PlayerList(
+                players = players, onNavigateToPlayer = onNavigateToPlayer
+            )
         }
     }
 }
@@ -51,15 +72,14 @@ private fun PlayerList(
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(4.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         items(players) { player ->
-            ChoosePlayerButton(
-                player,
-                onNavigateToPlayer
+            ChooseItemButton(
+                label = player.name,
+                onSelected = { onNavigateToPlayer(player) }
             )
         }
     }
@@ -69,26 +89,16 @@ private fun PlayerList(
 @Composable
 fun ChoosePlayerPagePreview() {
     TableGamesPointsSheetTheme {
-        PlayerList(
+        Page(
+            title = "Skull King - Match 1",
             players = listOf(
-                PlayerState(
-                    id = UUID.randomUUID(),
-                    name = "Player 1"
-                ),
-                PlayerState(
-                    id = UUID.randomUUID(),
-                    name = "Player 2"
-                ),
-                PlayerState(
-                    id = UUID.randomUUID(),
-                    name = "Player 3"
-                ),
-                PlayerState(
-                    id = UUID.randomUUID(),
-                    name = "Player 4"
-                ),
+                PlayerState(id = UUID.randomUUID(), name = "Player 1"),
+                PlayerState(id = UUID.randomUUID(), name = "Player 2"),
+                PlayerState(id = UUID.randomUUID(), name = "Player 3"),
+                PlayerState(id = UUID.randomUUID(), name = "Player 4"),
             ),
-            onNavigateToPlayer = {}
+            onNavigateToPlayer = {},
+            onNavigateBack = {},
         )
     }
 }

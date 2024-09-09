@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import fr.rage.lafie.table.games.points.sheet.R
 import fr.rage.lafie.table.games.points.sheet.ui.component.core.Loader
-import kotlin.reflect.KClass
 
 /**
  * A generic class that holds a value with its loading status.
@@ -39,32 +38,6 @@ fun <T> Result<T>.getOrNull(): T? = when (this) {
 fun <T> Result<T>.getExceptionOrNull(): Throwable? = when (this) {
     is Result.Error -> this.exception
     else -> null
-}
-
-inline fun <A, B> Result<A>.map(transform: (A) -> B): Result<B> = when (this) {
-    is Result.Success -> Result.Success(transform(getOrNull()!!))
-    is Result.Error -> this
-    is Result.Loading -> this
-}
-
-inline fun <A, reified E : Throwable> Result<A>.onErrorResume(
-    type: KClass<E>,
-    fallback: (E) -> A,
-): Result<A> =
-    when (this) {
-        is Result.Success -> this
-        is Result.Error -> {
-            if (exception is E) Result.Success(fallback(exception)) else this
-        }
-
-        is Result.Loading -> this
-    }
-
-inline fun <A> Result<A>.ifSuccess(
-    action: (A) -> Unit,
-): Result<A> {
-    if (this is Result.Success) action(data)
-    return this
 }
 
 @Composable
