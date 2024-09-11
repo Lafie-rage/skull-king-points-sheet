@@ -7,14 +7,11 @@ import fr.rage.lafie.table.games.points.sheet.data.model.Player
 import fr.rage.lafie.table.games.points.sheet.data.repository.GameRepository
 import fr.rage.lafie.table.games.points.sheet.data.repository.MatchRepository
 import fr.rage.lafie.table.games.points.sheet.data.repository.PlayerRepository
-import fr.rage.lafie.table.games.points.sheet.domain.mapper.toState
-import fr.rage.lafie.table.games.points.sheet.ui.page.player.choose.PlayerState
 import fr.rage.lafie.table.games.points.sheet.utils.Result
 import fr.rage.lafie.table.games.points.sheet.utils.getExceptionOrNull
 import fr.rage.lafie.table.games.points.sheet.utils.getOrNull
 import fr.rage.lafie.table.games.points.sheet.utils.isError
 import fr.rage.lafie.table.games.points.sheet.utils.isSuccess
-import fr.rage.lafie.table.games.points.sheet.utils.map
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Single
@@ -27,12 +24,12 @@ class GetMatchPlayerListUseCase(
     private val gameRepository: GameRepository,
 ) {
 
-    operator fun invoke(matchId: UUID): Flow<Result<List<PlayerState>>> =
+    operator fun invoke(matchId: UUID): Flow<Result<List<Player>>> =
         playerRepository.getAllByMatchId(matchId).map {
             if (it.isSuccess && it.getOrNull()?.isEmpty() != false) {
                 initPlayers(matchId)
             }
-            it.map(List<Player>::toState)
+            it
         }
 
     private suspend fun initPlayers(matchId: UUID) {

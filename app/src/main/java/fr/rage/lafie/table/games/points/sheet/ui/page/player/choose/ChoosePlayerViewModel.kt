@@ -4,8 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import fr.rage.lafie.table.games.points.sheet.domain.mapper.toState
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.match.GetMatchPlayerListUseCase
-import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetPageTitleUsingMatchAndGameNamesByMatchIdUseCase
+import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetGameNameByMatchIdUseCase
+import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetdMatchNameByIdUseCase
 import fr.rage.lafie.table.games.points.sheet.ui.page.player.choose.state.ChoosePlayerState
 import fr.rage.lafie.table.games.points.sheet.ui.routing.ChoosePlayerRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
@@ -23,29 +25,36 @@ import java.util.UUID
 class ChoosePlayerViewModel(
     savedStateHandle: SavedStateHandle,
     private val getPlayersUseCase: GetMatchPlayerListUseCase,
-    private val getTitleUseCase: GetPageTitleUsingMatchAndGameNamesByMatchIdUseCase,
+    private val getMatchNameUseCase: GetdMatchNameByIdUseCase,
+    private val getGameNameUseCase: GetGameNameByMatchIdUseCase,
 ) : ViewModel() {
 
     private val routeParams: ChoosePlayerRoute = savedStateHandle.toRoute()
 
-    val state: StateFlow<Result<ChoosePlayerState>> = buildState(
-        UUID.fromString(routeParams.matchId),
-    )
+    val state: StateFlow<Result<ChoosePlayerState>> =
+        buildState()
 
-    private fun buildState(matchId: UUID) = getPlayersUseCase(matchId)
-        .filterNotNull()
-        .map { rounds ->
-            getTitleUseCase(matchId).zip(rounds)
-                .map { (title, players) ->
-                    ChoosePlayerState(
-                        title = title,
-                        players = players,
-                    )
-                }
-        }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = Result.Loading,
-        )
+    private fun buildState(): StateFlow<Result<ChoosePlayerState>> {
+        val matchId = UUID.fromString(routeParams.matchId)
+        return getPlayersUseCase(matchId)
+            .filterNotNull()
+            .map { rounds ->
+                getMatchNameUseCase(matchId)
+                    .zip(getGameNameUseCase(matchId))
+                    .map { (matchName, gameName) ->
+                        "$gameName - $matchName"
+                    }.zip(rounds)
+                    .map { (title, players) ->
+                        ChoosePlayerState(
+                            title = title,
+                            players = players.toState(),
+                        )
+                    }
+            }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(),
+                initialValue = Result.Loading,
+            )
+    }
 }

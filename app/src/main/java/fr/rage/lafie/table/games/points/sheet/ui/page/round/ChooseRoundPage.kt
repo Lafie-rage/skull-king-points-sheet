@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import fr.rage.lafie.table.games.points.sheet.ui.component.ChooseItemGridList
+import fr.rage.lafie.table.games.points.sheet.ui.component.ChooseItemList
 import fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.table.games.points.sheet.ui.page.round.state.RoundState
 import fr.rage.lafie.table.games.points.sheet.ui.theme.TableGamesPointsSheetTheme
@@ -59,7 +59,7 @@ private fun Page(
                 .padding(innerPadding),
             contentAlignment = Alignment.TopCenter
         ) {
-            ChooseItemGridList(
+            ChooseItemList(
                 items = rounds.map { it.index },
                 getItemLabel = { it.toString() },
                 onItemSelected = onNavigateToRound,

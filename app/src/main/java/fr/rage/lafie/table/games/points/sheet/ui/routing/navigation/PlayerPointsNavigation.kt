@@ -10,7 +10,7 @@ import java.util.UUID
 fun NavGraphBuilder.playerRoundPointNavigation(
     onNavigateBack: () -> Unit,
 ) {
-    composable<PlayerRoundPointRoute> { backEntry ->
+    composable<PlayerRoundPointRoute> {
         PlayerRoundPointPage(
             onNavigateBack = onNavigateBack,
         )

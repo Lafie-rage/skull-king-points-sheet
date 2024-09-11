@@ -1,10 +1,8 @@
 package fr.rage.lafie.table.games.points.sheet.utils
 
-import androidx.compose.material3.Text
+import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import fr.rage.lafie.table.games.points.sheet.R
+import fr.rage.lafie.table.games.points.sheet.ui.component.core.ErrorView
 import fr.rage.lafie.table.games.points.sheet.ui.component.core.Loader
 
 /**
@@ -59,9 +57,6 @@ fun <T> Result<T>.MapToComposable(
 
 @Composable
 private fun DefaultErrorPlaceholder(error: Throwable) {
-    println(error.stackTraceToString())
-    Text(
-        color = Color.Red,
-        text = stringResource(R.string.unable_to_load_data)
-    )
+    Log.e(error.message, error.stackTraceToString())
+    ErrorView()
 }

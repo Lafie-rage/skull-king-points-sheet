@@ -5,28 +5,28 @@ import kotlinx.serialization.Serializable
 // FIXME Once Compose navigation safe args library supports parameters annotated with @Serializable(with=...), migrate Strings to UUIDs
 
 @Serializable
-object Home
+object HomeRoute
 
 @Serializable
-object CreateGame
+object CreateGameRoute
 
 @Serializable
-data class Matches(
+data class ChooseMatcheRoute(
     val gameId: String,
 )
 
 @Serializable
-data class CreateMatch(
+data class CreateMatchRoute(
     val gameId: String,
 )
 
 @Serializable
-data class DefinePlayers(
+data class DefinePlayersRoute(
     val matchId: String,
 )
 
 @Serializable
-data class ChooseRound(
+data class ChooseRoundRoute(
     val matchId: String,
 )
 
@@ -43,11 +43,11 @@ data class PlayerRoundPointRoute(
 )
 
 @Serializable
-data class MatchRecap(
+data class MatchRecapRoute(
     val matchId: String,
 )
 
 @Serializable
-data class PlayerRecap(
+data class PlayerRecapRoute(
     @Serializable val playerId: String,
 )

@@ -18,7 +18,7 @@ import java.util.UUID
         ),
     ],
     indices = [
-        Index(value = ["id"]),
+        Index(value = ["gameId"]),
     ],
 )
 data class MatchEntity(

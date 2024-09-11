@@ -9,4 +9,5 @@
     <string name="increase_points">Increase points</string>
     <string name="decrease_points">Decrease points</string>
     <string name="round_with_index">Round %1$d</string>
+    <string name="choose_match_page_title">%1$s matches\' history</string>
 </resources>

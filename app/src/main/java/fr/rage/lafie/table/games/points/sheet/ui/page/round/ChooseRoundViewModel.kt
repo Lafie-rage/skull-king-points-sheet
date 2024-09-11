@@ -8,21 +8,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.round.GetRoundsByMatchIdUseCase
-import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetPageTitleUsingMatchAndGameNamesByMatchIdUseCase
+import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetdMatchNameByIdUseCase
 import fr.rage.lafie.table.games.points.sheet.ui.page.round.state.ChooseRoundState
-import fr.rage.lafie.table.games.points.sheet.ui.routing.ChooseRound
+import fr.rage.lafie.table.games.points.sheet.ui.routing.ChooseRoundRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
 import fr.rage.lafie.table.games.points.sheet.utils.map
 import fr.rage.lafie.table.games.points.sheet.utils.zip
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
 
+@KoinViewModel
 class ChooseRoundViewModel(
     savedStateHandle: SavedStateHandle,
     private val getRoundsUseCase: GetRoundsByMatchIdUseCase,
-    private val getTitleUseCase: GetPageTitleUsingMatchAndGameNamesByMatchIdUseCase,
+    private val getTitleUseCase: GetdMatchNameByIdUseCase,
 ) : ViewModel() {
-    private val routeParams: ChooseRound = savedStateHandle.toRoute()
+    private val routeParams: ChooseRoundRoute = savedStateHandle.toRoute()
 
     private val _state: MutableState<Result<ChooseRoundState>> =
         mutableStateOf(Result.Loading)

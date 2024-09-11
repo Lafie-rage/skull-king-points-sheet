@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import fr.rage.lafie.table.games.points.sheet.ui.component.ChooseItemGridList
+import fr.rage.lafie.table.games.points.sheet.ui.component.ChooseItemList
 import fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.table.games.points.sheet.ui.theme.TableGamesPointsSheetTheme
 import fr.rage.lafie.table.games.points.sheet.utils.MapToComposable
@@ -26,10 +26,10 @@ fun ChoosePlayerPage(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    state.MapToComposable(onSuccess = {
+    state.MapToComposable(onSuccess = { (title, players) ->
         Page(
-            title = it.title,
-            players = it.players,
+            title = title,
+            players = players,
             onNavigateToPlayer = onNavigateToPlayer,
             onNavigateBack = onNavigateBack,
         )
@@ -54,7 +54,7 @@ private fun Page(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            ChooseItemGridList(
+            ChooseItemList(
                 items = players,
                 getItemLabel = { it.name },
                 onItemSelected = onNavigateToPlayer,
