@@ -1,5 +1,5 @@
 package fr.rage.lafie.table.games.points.sheet.ui.page.round.state
 
 data class RoundState(
-    val roundIndex: Int,
+    val index: Int,
 )

@@ -1,18 +1,17 @@
 package fr.rage.lafie.table.games.points.sheet.ui.page.round
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import fr.rage.lafie.table.games.points.sheet.ui.component.ChooseItemGridList
 import fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.table.games.points.sheet.ui.page.round.state.RoundState
 import fr.rage.lafie.table.games.points.sheet.ui.theme.TableGamesPointsSheetTheme
@@ -21,7 +20,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ChooseRoundPage(
-    onRoundSelected: (Int) -> Unit,
+    onNavigateToRound: (Int) -> Unit,
     onNavigateBack: () -> Unit,
     viewModel: ChooseRoundViewModel = koinViewModel(),
 ) {
@@ -32,7 +31,7 @@ fun ChooseRoundPage(
             Page(
                 it.title,
                 it.rounds,
-                onRoundSelected,
+                onNavigateToRound,
                 onNavigateBack,
             )
         }
@@ -43,7 +42,7 @@ fun ChooseRoundPage(
 private fun Page(
     title: String,
     rounds: List<RoundState>,
-    onRoundSelected: (Int) -> Unit,
+    onNavigateToRound: (Int) -> Unit,
     onNavigateBack: () -> Unit,
 ) {
     Scaffold(
@@ -60,32 +59,35 @@ private fun Page(
                 .padding(innerPadding),
             contentAlignment = Alignment.TopCenter
         ) {
+            ChooseItemGridList(
+                items = rounds.map { it.index },
+                getItemLabel = { it.toString() },
+                onItemSelected = onNavigateToRound,
+            )
         }
     }
 }
-
-@Composable
-private fun RoundList(
-    rounds: List<RoundState>,
-) {
-    LazyVerticalGrid(
-        modifier = Modifier.fillMaxWidth(),
-        columns = GridCells.Fixed(2),
-    ) {
-        items(rounds) {
-
-        }
-    }
-}
-
 
 @Preview(showBackground = true)
 @Composable
-fun Preview() {
+fun ChooseRoundPagePreview() {
+    val context = LocalContext.current
+
     TableGamesPointsSheetTheme {
-        ChooseRoundPage(
-            onRoundSelected = {},
-            onNavigateBack = {}
+        Page(
+            title = "Skull King - Match 1",
+            rounds = listOf(
+                RoundState(1),
+                RoundState(2),
+                RoundState(3),
+                RoundState(4),
+            ),
+            onNavigateToRound = { roundIndex ->
+                Toast.makeText(context, "Navigate to round $roundIndex", Toast.LENGTH_LONG).show()
+            },
+            onNavigateBack = {
+                Toast.makeText(context, "Navigate back", Toast.LENGTH_LONG).show()
+            }
         )
     }
 }
