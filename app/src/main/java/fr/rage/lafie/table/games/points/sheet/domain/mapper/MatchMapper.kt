@@ -2,7 +2,7 @@ package fr.rage.lafie.table.games.points.sheet.domain.mapper
 
 import fr.rage.lafie.table.games.points.sheet.data.database.entity.MatchEntity
 import fr.rage.lafie.table.games.points.sheet.data.model.Match
-import fr.rage.lafie.table.games.points.sheet.ui.page.match.state.MatchState
+import fr.rage.lafie.table.games.points.sheet.ui.page.match.choose.state.MatchState
 
 // region ENTITY -> MODEL
 fun MatchEntity.toModel() = Match(

@@ -8,6 +8,7 @@ import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.choosePlayer
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.chooseRoundNavigation
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.navigateToChoosePlayerPage
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.navigateToChooseRoundPage
+import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.navigateToCreateMatchPage
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.navigateToPlayerPointsPage
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.playerPointNavigation
 
@@ -20,8 +21,13 @@ fun Router() {
             "c07b822c-dbd5-41ec-a15a-5bf55c3bd1bb",
         ),
     ) {
+        createMatchNavigation(
+
+        )
+
         chooseMatchNavigation(
             navigateToChooseRoundPage = navController::navigateToChooseRoundPage,
+            navigateToCreateMachPage = navController::navigateToCreateMatchPage,
             onBackPressed = navController::navigateUp
         )
 

@@ -1,4 +1,4 @@
-package fr.rage.lafie.table.games.points.sheet.ui.page.match
+package fr.rage.lafie.table.games.points.sheet.ui.page.match.choose
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import androidx.navigation.toRoute
 import fr.rage.lafie.table.games.points.sheet.domain.mapper.toState
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.match.GetMatchesByGameIdUseCase
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetGameNameByMatchIdUseCase
-import fr.rage.lafie.table.games.points.sheet.ui.page.match.state.ChooseMatchState
+import fr.rage.lafie.table.games.points.sheet.ui.page.match.choose.state.ChooseMatchState
 import fr.rage.lafie.table.games.points.sheet.ui.routing.ChooseMatchRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
 import fr.rage.lafie.table.games.points.sheet.utils.map

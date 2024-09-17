@@ -1,9 +1,13 @@
-package fr.rage.lafie.table.games.points.sheet.ui.page.match
+package fr.rage.lafie.table.games.points.sheet.ui.page.match.choose
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,7 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rage.lafie.table.games.points.sheet.R
 import fr.rage.lafie.table.games.points.sheet.ui.component.ChooseItemList
 import fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar.AppBar
-import fr.rage.lafie.table.games.points.sheet.ui.page.match.state.MatchState
+import fr.rage.lafie.table.games.points.sheet.ui.page.match.choose.state.MatchState
 import fr.rage.lafie.table.games.points.sheet.ui.theme.TableGamesPointsSheetTheme
 import fr.rage.lafie.table.games.points.sheet.utils.MapToComposable
 import org.koin.compose.viewmodel.koinViewModel
@@ -24,6 +28,7 @@ import java.util.UUID
 @Composable
 fun ChooseMatchPage(
     onMatchSelected: (UUID) -> Unit,
+    onCreateNewMatchClicked: () -> Unit,
     onBackPressed: () -> Unit,
     viewModel: ChooseMatchViewModel = koinViewModel(),
 ) {
@@ -35,6 +40,7 @@ fun ChooseMatchPage(
                 gameName = gameName,
                 matches = matches,
                 onNavigateToMatch = onMatchSelected,
+                onCreateNewMatchClicked = onCreateNewMatchClicked,
                 onBackPressed = onBackPressed,
             )
         }
@@ -46,6 +52,7 @@ private fun Page(
     gameName: String,
     matches: List<MatchState>,
     onNavigateToMatch: (UUID) -> Unit,
+    onCreateNewMatchClicked: () -> Unit,
     onBackPressed: () -> Unit,
 ) {
     Scaffold(
@@ -54,6 +61,14 @@ private fun Page(
                 title = stringResource(R.string.choose_match_page_title, gameName),
                 onBackPressed = onBackPressed,
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = onCreateNewMatchClicked) {
+                Icon(
+                    Icons.Default.Add,
+                    contentDescription = stringResource(R.string.create_new_match)
+                )
+            }
         }
     ) { innerPadding ->
         Box(
@@ -103,6 +118,10 @@ fun ChooseMatchPagePreview() {
             ),
             { matchId ->
                 Toast.makeText(context, "Navigate to match with id $matchId", Toast.LENGTH_LONG)
+                    .show()
+            },
+            {
+                Toast.makeText(context, "Create new match FAB clicked", Toast.LENGTH_LONG)
                     .show()
             },
             {

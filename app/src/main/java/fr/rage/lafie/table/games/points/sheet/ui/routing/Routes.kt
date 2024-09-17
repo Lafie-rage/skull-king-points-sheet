@@ -21,6 +21,12 @@ data class CreateMatchRoute(
 )
 
 @Serializable
+object CreateMatchMainInfosRoute
+
+@Serializable
+object CreateMatchPlayersRoute
+
+@Serializable
 data class DefinePlayersRoute(
     val matchId: String,
 )
