@@ -31,9 +31,9 @@ import org.koin.compose.viewmodel.koinViewModel
 import java.util.UUID
 
 @Composable
-fun PlayerRoundPointPage(
-    onNavigateBack: () -> Unit,
-    viewModel: PlayerRoundPointViewModel = koinViewModel(),
+fun PlayerPointPage(
+    onBackPressed: () -> Unit,
+    viewModel: PlayerPointViewModel = koinViewModel(),
 ) {
 
     val player by viewModel.player
@@ -46,9 +46,9 @@ fun PlayerRoundPointPage(
             onPointsChanged = viewModel::setPoints,
             onValidatePressed = {
                 viewModel.save()
-                onNavigateBack()
+                onBackPressed()
             },
-            onNavigateBack = onNavigateBack,
+            onBackPressed = onBackPressed,
         )
     })
 }
@@ -59,13 +59,13 @@ private fun Page(
     points: Long,
     onPointsChanged: (Long) -> Unit,
     onValidatePressed: () -> Unit,
-    onNavigateBack: () -> Unit,
+    onBackPressed: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             AppBar(
                 title = player.name,
-                onNavigateBack = onNavigateBack,
+                onBackPressed = onBackPressed,
             )
         }
     ) { innerPadding ->
@@ -125,7 +125,7 @@ fun Preview() {
                 points = it
             },
             onValidatePressed = {},
-            onNavigateBack = {},
+            onBackPressed = {},
         )
     }
 }

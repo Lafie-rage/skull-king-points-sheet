@@ -21,7 +21,7 @@ import java.util.UUID
 @Composable
 fun ChoosePlayerPage(
     onNavigateToPlayer: (PlayerState) -> Unit,
-    onNavigateBack: () -> Unit,
+    onBackPressed: () -> Unit,
     viewModel: ChoosePlayerViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -31,7 +31,7 @@ fun ChoosePlayerPage(
             title = title,
             players = players,
             onNavigateToPlayer = onNavigateToPlayer,
-            onNavigateBack = onNavigateBack,
+            onBackPressed = onBackPressed,
         )
     })
 }
@@ -41,12 +41,12 @@ private fun Page(
     title: String,
     players: List<PlayerState>,
     onNavigateToPlayer: (PlayerState) -> Unit,
-    onNavigateBack: () -> Unit,
+    onBackPressed: () -> Unit,
 ) {
     Scaffold(topBar = {
         AppBar(
             title = title,
-            onNavigateBack = onNavigateBack,
+            onBackPressed = onBackPressed,
         )
     }) { innerPadding ->
         Box(
@@ -81,7 +81,7 @@ fun ChoosePlayerPagePreview() {
                 Toast.makeText(context, "Navigate to player ${player.name}", Toast.LENGTH_LONG)
                     .show()
             },
-            onNavigateBack = {
+            onBackPressed = {
                 Toast.makeText(context, "Navigate back", Toast.LENGTH_LONG).show()
             },
         )

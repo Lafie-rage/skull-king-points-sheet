@@ -20,8 +20,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ChooseRoundPage(
-    onNavigateToRound: (Int) -> Unit,
-    onNavigateBack: () -> Unit,
+    onRoundSelected: (Int) -> Unit,
+    onBackPressed: () -> Unit,
     viewModel: ChooseRoundViewModel = koinViewModel(),
 ) {
     val state by viewModel.state
@@ -31,8 +31,8 @@ fun ChooseRoundPage(
             Page(
                 it.title,
                 it.rounds,
-                onNavigateToRound,
-                onNavigateBack,
+                onRoundSelected,
+                onBackPressed,
             )
         }
     )
@@ -43,13 +43,13 @@ private fun Page(
     title: String,
     rounds: List<RoundState>,
     onNavigateToRound: (Int) -> Unit,
-    onNavigateBack: () -> Unit,
+    onBackPressed: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             AppBar(
                 title = title,
-                onNavigateBack = onNavigateBack,
+                onBackPressed = onBackPressed,
             )
         }
     ) { innerPadding ->
@@ -85,7 +85,7 @@ fun ChooseRoundPagePreview() {
             onNavigateToRound = { roundIndex ->
                 Toast.makeText(context, "Navigate to round $roundIndex", Toast.LENGTH_LONG).show()
             },
-            onNavigateBack = {
+            onBackPressed = {
                 Toast.makeText(context, "Navigate back", Toast.LENGTH_LONG).show()
             }
         )

@@ -1,5 +1,6 @@
 package fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -31,13 +32,17 @@ import fr.rage.lafie.table.games.points.sheet.ui.theme.TableGamesPointsSheetThem
 fun AppBar(
     title: String,
     actions: @Composable (RowScope.() -> Unit)? = null,
-    onNavigateBack: (() -> Unit)? = null,
+    onBackPressed: (() -> Unit)? = null,
 ) {
     var isMenuExpanded by remember { mutableStateOf(false) }
 
+    BackHandler(enabled = onBackPressed != null) {
+        onBackPressed!!.invoke()
+    }
+
     TopAppBar(
         navigationIcon = {
-            onNavigateBack?.let {
+            onBackPressed?.let {
                 IconButton(
                     onClick = it
                 ) {
@@ -88,7 +93,7 @@ fun Preview() {
                 EndMatchMenuAction { }
                 MatchRecapMenuAction { }
             },
-            onNavigateBack = {},
+            onBackPressed = {},
         )
     }
 }

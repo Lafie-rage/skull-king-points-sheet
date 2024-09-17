@@ -12,7 +12,7 @@ import fr.rage.lafie.table.games.points.sheet.domain.usecase.player.GetPlayerByI
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.points.GetPlayerPointsByPlayerIdUseCase
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.points.SavePlayerPointsUseCase
 import fr.rage.lafie.table.games.points.sheet.ui.page.player.choose.PlayerState
-import fr.rage.lafie.table.games.points.sheet.ui.routing.PlayerRoundPointRoute
+import fr.rage.lafie.table.games.points.sheet.ui.routing.PlayerPointRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
 import fr.rage.lafie.table.games.points.sheet.utils.ifSuccess
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
 
 @KoinViewModel
-class PlayerRoundPointViewModel(
+class PlayerPointViewModel(
     savedStateHandle: SavedStateHandle,
     private val getPlayerUseCase: GetPlayerByIdUseCase,
     private val getPlayerPointsUseCase: GetPlayerPointsByPlayerIdUseCase,
@@ -45,7 +45,7 @@ class PlayerRoundPointViewModel(
     val player: State<Result<PlayerState>>
         get() = _player
 
-    private val routeParams: PlayerRoundPointRoute = savedStateHandle.toRoute()
+    private val routeParams: PlayerPointRoute = savedStateHandle.toRoute()
 
     init {
         viewModelScope.launch {

@@ -23,8 +23,8 @@ import java.util.UUID
 
 @Composable
 fun ChooseMatchPage(
-    onNavigateToMatch: (UUID) -> Unit,
-    onNavigateBack: () -> Unit,
+    onMatchSelected: (UUID) -> Unit,
+    onBackPressed: () -> Unit,
     viewModel: ChooseMatchViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -32,10 +32,10 @@ fun ChooseMatchPage(
     state.MapToComposable(
         onSuccess = { (gameName, matches) ->
             Page(
-                gameName =,
+                gameName = gameName,
                 matches = matches,
-                onNavigateToMatch = onNavigateToMatch,
-                onNavigateBack = onNavigateBack,
+                onNavigateToMatch = onMatchSelected,
+                onBackPressed = onBackPressed,
             )
         }
     )
@@ -46,13 +46,13 @@ private fun Page(
     gameName: String,
     matches: List<MatchState>,
     onNavigateToMatch: (UUID) -> Unit,
-    onNavigateBack: () -> Unit,
+    onBackPressed: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             AppBar(
                 title = stringResource(R.string.choose_match_page_title, gameName),
-                onNavigateBack = onNavigateBack,
+                onBackPressed = onBackPressed,
             )
         }
     ) { innerPadding ->
@@ -82,7 +82,7 @@ fun ChooseMatchPagePreview() {
 
     TableGamesPointsSheetTheme {
         Page(
-            gameName ="Skull King",
+            gameName = "Skull King",
             matches = listOf(
                 MatchState(
                     id = UUID.randomUUID(),
@@ -90,7 +90,7 @@ fun ChooseMatchPagePreview() {
                 ),
                 MatchState(
                     id = UUID.randomUUID(),
-                    name = ="Match 2",
+                    name = "Match 2",
                 ),
                 MatchState(
                     id = UUID.randomUUID(),

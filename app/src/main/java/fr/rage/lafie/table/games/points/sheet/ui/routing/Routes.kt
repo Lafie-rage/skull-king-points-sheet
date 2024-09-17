@@ -11,7 +11,7 @@ object HomeRoute
 object CreateGameRoute
 
 @Serializable
-data class ChooseMatcheRoute(
+data class ChooseMatchRoute(
     val gameId: String,
 )
 
@@ -37,7 +37,7 @@ data class ChoosePlayerRoute(
 )
 
 @Serializable
-data class PlayerRoundPointRoute(
+data class PlayerPointRoute(
     val playerId: String,
     val roundIndex: Int,
 )

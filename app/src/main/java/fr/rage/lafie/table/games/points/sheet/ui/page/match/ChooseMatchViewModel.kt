@@ -8,7 +8,7 @@ import fr.rage.lafie.table.games.points.sheet.domain.mapper.toState
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.match.GetMatchesByGameIdUseCase
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetGameNameByMatchIdUseCase
 import fr.rage.lafie.table.games.points.sheet.ui.page.match.state.ChooseMatchState
-import fr.rage.lafie.table.games.points.sheet.ui.routing.ChooseMatcheRoute
+import fr.rage.lafie.table.games.points.sheet.ui.routing.ChooseMatchRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
 import fr.rage.lafie.table.games.points.sheet.utils.map
 import fr.rage.lafie.table.games.points.sheet.utils.zip
@@ -25,9 +25,9 @@ class ChooseMatchViewModel(
     private val getMatchesUseCase: GetMatchesByGameIdUseCase,
     private val getGameNameUseCase: GetGameNameByMatchIdUseCase,
 ) : ViewModel() {
-    val state: StateFlow<Result<ChooseMatchState>> = buildState()
+    private val routeParams: ChooseMatchRoute = savedStateHandle.toRoute()
 
-    private val routeParams: ChooseMatcheRoute = savedStateHandle.toRoute()
+    val state: StateFlow<Result<ChooseMatchState>> = buildState()
 
     private fun buildState(): StateFlow<Result<ChooseMatchState>> {
         val gameId = UUID.fromString(routeParams.gameId)

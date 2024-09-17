@@ -10,21 +10,21 @@ import java.util.UUID
 
 
 fun NavGraphBuilder.choosePlayerNavigation(
-    onNavigateToPlayer: (UUID, Int) -> Unit,
-    onNavigateBack: () -> Unit,
+    navigateToPlayerPointPage: (UUID, Int) -> Unit,
+    onBackPressed: () -> Unit,
 ) {
     composable<ChoosePlayerRoute> { backEntry ->
         val routeParams: ChoosePlayerRoute = backEntry.toRoute()
         ChoosePlayerPage(
             onNavigateToPlayer = { player ->
-                onNavigateToPlayer(player.id, routeParams.roundIndex)
+                navigateToPlayerPointPage(player.id, routeParams.roundIndex)
             },
-            onNavigateBack = onNavigateBack,
+            onBackPressed = onBackPressed,
         )
     }
 }
 
-fun NavController.navigateToChoosePlayer(
+fun NavController.navigateToChoosePlayerPage(
     matchId: UUID,
     roundIndex: Int,
 ) {
