@@ -10,4 +10,8 @@ import java.util.UUID
 data class GameEntity(
     @PrimaryKey val id: UUID,
     val name: String,
+    val minPlayers: Int,
+    val maxPlayers: Int,
+    val maxRounds: Int,
+    val shouldSumUpRoundsScores: Boolean,
 )

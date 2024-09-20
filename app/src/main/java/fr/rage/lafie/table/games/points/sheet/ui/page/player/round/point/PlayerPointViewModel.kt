@@ -26,29 +26,31 @@ class PlayerPointViewModel(
     private val getPlayerPointsUseCase: GetPlayerPointsByPlayerIdUseCase,
     private val savePlayerPointsUseCase: SavePlayerPointsUseCase,
 ) : ViewModel() {
-    private val state by lazy {
-        mutableStateOf(
-            PlayerPointsState(
-                id = UUID.randomUUID(),
-                playerId = UUID.fromString(routeParams.playerId),
-                roundIndex = routeParams.roundIndex,
-                points = 0,
-            )
-        )
-    }
+    private val routeParams: PlayerPointRoute = savedStateHandle.toRoute()
 
+    private val state: MutableState<PlayerPointsState> = mutableStateOf(
+        PlayerPointsState(
+            id = UUID.randomUUID(),
+            playerId = UUID.fromString(routeParams.playerId),
+            roundIndex = routeParams.roundIndex,
+            points = 0,
+        )
+    )
+
+    // TODO Merge avec le state
     private val _points: MutableState<Long> = mutableLongStateOf(0)
     val points: State<Long>
         get() = _points
 
+    // TODO Merge avec le state
     private val _player: MutableState<Result<PlayerState>> = mutableStateOf(Result.Loading)
     val player: State<Result<PlayerState>>
         get() = _player
 
-    private val routeParams: PlayerPointRoute = savedStateHandle.toRoute()
 
     init {
         viewModelScope.launch {
+            // TODO Certainement à simplifier avec retrait de _points et _player
             val playerId = UUID.fromString(routeParams.playerId)
             _player.value = getPlayerUseCase(playerId)
 

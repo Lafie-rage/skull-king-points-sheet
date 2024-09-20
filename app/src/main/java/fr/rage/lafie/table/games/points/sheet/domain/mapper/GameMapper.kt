@@ -7,6 +7,10 @@ import fr.rage.lafie.table.games.points.sheet.data.model.Game
 fun GameEntity.toModel() = Game(
     id = id,
     name = name,
+    minPlayers = minPlayers,
+    maxPlayers = maxPlayers,
+    maxRounds = maxRounds,
+    shouldSumUpRoundsScores = shouldSumUpRoundsScores,
 )
 
 fun List<GameEntity>.toModel(): List<Game> = this.map(GameEntity::toModel)
@@ -19,5 +23,9 @@ fun List<GameEntity>.toModel(): List<Game> = this.map(GameEntity::toModel)
 fun Game.toEntity() = GameEntity(
     id = id,
     name = name,
+    minPlayers = minPlayers,
+    maxPlayers = maxPlayers,
+    maxRounds = maxRounds,
+    shouldSumUpRoundsScores = shouldSumUpRoundsScores
 )
 // endregion
