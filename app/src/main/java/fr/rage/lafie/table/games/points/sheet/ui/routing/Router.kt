@@ -19,7 +19,7 @@ fun Router() {
     NavHost(
         navController = navController,
         startDestination = ChooseMatchRoute(
-            "c07b822c-dbd5-41ec-a15a-5bf55c3bd1bb",
+            "2c3466fc-d033-460f-9020-5d89cbfc2c55",
         ),
     ) {
         createMatchNavigation(

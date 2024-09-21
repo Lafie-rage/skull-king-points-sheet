@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import fr.rage.lafie.table.games.points.sheet.domain.mapper.toState
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.match.GetMatchesByGameIdUseCase
-import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetGameNameByMatchIdUseCase
+import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetGameNameByIdUseCase
 import fr.rage.lafie.table.games.points.sheet.ui.page.match.choose.state.ChooseMatchState
 import fr.rage.lafie.table.games.points.sheet.ui.routing.ChooseMatchRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
@@ -23,7 +23,7 @@ import java.util.UUID
 class ChooseMatchViewModel(
     savedStateHandle: SavedStateHandle,
     private val getMatchesUseCase: GetMatchesByGameIdUseCase,
-    private val getGameNameUseCase: GetGameNameByMatchIdUseCase,
+    private val getGameNameUseCase: GetGameNameByIdUseCase,
 ) : ViewModel() {
     private val routeParams: ChooseMatchRoute = savedStateHandle.toRoute()
 
