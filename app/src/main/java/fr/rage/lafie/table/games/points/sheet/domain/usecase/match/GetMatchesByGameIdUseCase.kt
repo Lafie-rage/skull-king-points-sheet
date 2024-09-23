@@ -64,7 +64,7 @@ class GetMatchesByGameIdUseCase(
         return repository.getById(gameId).let { retrievedMatch ->
             if (retrievedMatch.isError && retrievedMatch.getExceptionOrNull() is EntityNotFoundById) {
                 createGame(gameId)
-                return repository.create(
+                return repository.createOrUpdate(
                     match = Match(
                         id = UUID.fromString("c07b822c-dbd5-41ec-a15a-5bf55c3bd1bb"),
                         gameId = gameId,

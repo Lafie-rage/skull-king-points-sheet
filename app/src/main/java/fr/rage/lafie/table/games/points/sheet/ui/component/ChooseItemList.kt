@@ -76,6 +76,7 @@ private fun <T> SimpleList(
     ) {
         items(items) { item ->
             ChooseItemButton(
+                modifier = Modifier.fillMaxWidth(0.9f),
                 label = getItemLabel(item),
                 onSelected = { onItemSelected(item) },
             )

@@ -11,6 +11,15 @@
     <string name="round_with_index">Round %1$d</string>
     <string name="choose_match_page_title">%1$s matches\' history</string>
     <string name="create_new_match">Create a new match</string>
+    <string name="create_new_round">Create a new round</string>
     <string name="cannot_add_more_player">You can\'t add more than 20 players.</string>
     <string name="at_least_one_player_needed">You can\'t create a match with less than 1 player.</string>
+    <string name="start_new_match">Start a new match</string>
+    <string name="match_name">Match name</string>
+    <string name="decrease_players_count">Decrease players count</string>
+    <string name="increase_players_count">Increase players count</string>
+    <string name="cannot_have_more_than_X_players">A match can\'t have more than %1$d players</string>
+    <string name="cannot_have_less_than_X_players">A match can\'t have less than %1$d player(s)</string>
+    <string name="next">Next</string>
+    <string name="player_X_name">Player %1$d\'s name</string>
 </resources>

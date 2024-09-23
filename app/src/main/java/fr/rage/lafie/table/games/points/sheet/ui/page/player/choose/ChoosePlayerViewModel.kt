@@ -8,7 +8,6 @@ import fr.rage.lafie.table.games.points.sheet.domain.mapper.toState
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.match.GetMatchPlayerListUseCase
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetGameNameByMatchIdUseCase
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetdMatchNameByIdUseCase
-import fr.rage.lafie.table.games.points.sheet.ui.page.player.choose.state.ChoosePlayerState
 import fr.rage.lafie.table.games.points.sheet.ui.routing.ChoosePlayerRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
 import fr.rage.lafie.table.games.points.sheet.utils.map

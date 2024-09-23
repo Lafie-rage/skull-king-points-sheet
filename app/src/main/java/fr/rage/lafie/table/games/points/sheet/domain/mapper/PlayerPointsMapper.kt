@@ -2,7 +2,7 @@ package fr.rage.lafie.table.games.points.sheet.domain.mapper
 
 import fr.rage.lafie.table.games.points.sheet.data.database.entity.PlayerPointsEntity
 import fr.rage.lafie.table.games.points.sheet.data.model.PlayerPoints
-import fr.rage.lafie.table.games.points.sheet.ui.page.player.round.point.PlayerPointsState
+import fr.rage.lafie.table.games.points.sheet.ui.page.player.point.PlayerPointsState
 
 // region ENTITY -> MODEL
 fun PlayerPointsEntity.toModel() = PlayerPoints(

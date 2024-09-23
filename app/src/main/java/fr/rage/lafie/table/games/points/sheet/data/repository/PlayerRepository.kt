@@ -7,7 +7,7 @@ import java.util.UUID
 
 interface PlayerRepository {
     // region ADD
-    suspend fun associateToMatch(players: List<Player>, matchId: UUID)
+    suspend fun associateToMatch(players: List<Player>, matchId: UUID): Result<Unit>
     // endregion
 
     // region GET

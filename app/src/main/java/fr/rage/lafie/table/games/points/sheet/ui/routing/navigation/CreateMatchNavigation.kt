@@ -6,12 +6,24 @@ import androidx.navigation.navigation
 import fr.rage.lafie.table.games.points.sheet.ui.routing.CreateMatchMainInfosRoute
 import fr.rage.lafie.table.games.points.sheet.ui.routing.CreateMatchRoute
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.creatematch.createMatchMainInfosNavigation
+import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.creatematch.createMatchPlayerListNavigation
 import java.util.UUID
 
-fun NavGraphBuilder.createMatchNavigation() {
-
+fun NavGraphBuilder.createMatchNavigation(
+    navigateToCreateMatchPlayerListPage: (String, Int) -> Unit,
+    navigateToChooseRoundPage: (UUID) -> Unit,
+    onBackPressed: () -> Unit,
+) {
     navigation<CreateMatchRoute>(startDestination = CreateMatchMainInfosRoute) {
-        createMatchMainInfosNavigation()
+        createMatchMainInfosNavigation(
+            navigateToCreateMatchPlayerListPage = navigateToCreateMatchPlayerListPage,
+            onBackPressed = onBackPressed,
+        )
+
+        createMatchPlayerListNavigation(
+            navigateToChooseRoundPage = navigateToChooseRoundPage,
+            onBackPressed = onBackPressed,
+        )
     }
 }
 

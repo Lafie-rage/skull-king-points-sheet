@@ -7,6 +7,7 @@ import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.chooseMatchN
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.choosePlayerNavigation
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.chooseRoundNavigation
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.createMatchNavigation
+import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.creatematch.navigateToCreateMatchPlayerListPage
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.navigateToChoosePlayerPage
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.navigateToChooseRoundPage
 import fr.rage.lafie.table.games.points.sheet.ui.routing.navigation.navigateToCreateMatchPage
@@ -23,7 +24,9 @@ fun Router() {
         ),
     ) {
         createMatchNavigation(
-
+            navigateToCreateMatchPlayerListPage = navController::navigateToCreateMatchPlayerListPage,
+            navigateToChooseRoundPage = navController::navigateToChooseRoundPage,
+            onBackPressed = navController::navigateUp
         )
 
         chooseMatchNavigation(

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.game.GetGameByIdUseCase
-import fr.rage.lafie.table.games.points.sheet.ui.page.match.create.maininfos.state.CreateMatchMainInfosState
 import fr.rage.lafie.table.games.points.sheet.ui.routing.CreateMatchRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
 import fr.rage.lafie.table.games.points.sheet.utils.map
@@ -39,20 +38,7 @@ class CreateMatchMainInfosViewModel(
         }
     }
 
-
     fun changeMatchName(matchName: String) {
         _state.value = _state.value.map { it.copy(matchName = matchName) }
-    }
-
-    fun increaseMaxPlayer() {
-        _state.value = _state.value.map {
-            it.copy(playersCount = minOf(it.playersCount + 1, 20))
-        }
-    }
-
-    fun decreaseMaxPlayer() {
-        _state.value = _state.value.map {
-            it.copy(playersCount = maxOf(it.playersCount - 1, 0))
-        }
     }
 }

@@ -1,4 +1,4 @@
-package fr.rage.lafie.table.games.points.sheet.ui.page.match.create.maininfos.state
+package fr.rage.lafie.table.games.points.sheet.ui.page.match.create.maininfos
 
 data class CreateMatchMainInfosState(
     val matchName: String = "",

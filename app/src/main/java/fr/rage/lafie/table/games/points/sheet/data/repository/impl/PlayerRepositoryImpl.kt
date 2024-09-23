@@ -22,8 +22,9 @@ class PlayerRepositoryImpl(
     override suspend fun associateToMatch(
         players: List<Player>,
         matchId: UUID
-    ) {
-        return dao.upsert(players.toEntity(matchId))
+    ): Result.Success<Unit> {
+        dao.upsert(players.toEntity(matchId))
+        return Result.Success(Unit)
     }
     // endregion
 

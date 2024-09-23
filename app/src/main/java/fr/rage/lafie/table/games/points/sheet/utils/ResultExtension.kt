@@ -16,11 +16,10 @@ suspend inline fun <A, B> Result<A>.flatMap(crossinline transform: suspend (A) -
         is Result.Loading -> this
     }
 
-inline fun <A> Result<A>.ifSuccess(
-    action: (A) -> Unit,
-): Result<A> {
-    if (this is Result.Success) action(data)
-    return this
+fun <A> Result<A>.then(): Result<Unit> = when (this) {
+    is Result.Loading -> this
+    is Result.Error -> this
+    is Result.Success -> Result.Success(Unit)
 }
 // endregion
 
@@ -28,15 +27,14 @@ inline fun <A> Result<A>.ifSuccess(
 inline fun <A, reified E : Throwable> Result<A>.onErrorResume(
     type: KClass<E>,
     fallback: (E) -> A,
-): Result<A> =
-    when (this) {
-        is Result.Success -> this
-        is Result.Error -> {
-            if (exception is E) Result.Success(fallback(exception)) else this
-        }
-
-        is Result.Loading -> this
+): Result<A> = when (this) {
+    is Result.Success -> this
+    is Result.Error -> {
+        if (exception is E) Result.Success(fallback(exception)) else this
     }
+
+    is Result.Loading -> this
+}
 // endregion
 
 // region COMBINE
@@ -48,5 +46,27 @@ fun <A, B> Result<A>.zip(
     this is Result.Loading -> this
     other is Result.Loading -> other
     else -> Result.Success(Pair(this.getOrNull()!!, other.getOrNull()!!))
+}
+
+fun <A, B, C> Result<A>.zip(
+    first: Result<B>,
+    second: Result<C>,
+): Result<Triple<A, B, C>> = when {
+    this is Result.Error -> this
+    first is Result.Error -> first
+    second is Result.Error -> second
+    this is Result.Loading -> this
+    first is Result.Loading -> first
+    second is Result.Loading -> second
+    else -> Result.Success(Triple(this.getOrNull()!!, first.getOrNull()!!, second.getOrNull()!!))
+}
+// endregion
+
+// region CHAIN
+inline fun <A> Result<A>.doOnNext(
+    action: (A) -> Unit,
+): Result<A> {
+    if (this is Result.Success) action(data)
+    return this
 }
 // endregion

@@ -3,7 +3,7 @@ package fr.rage.lafie.table.games.points.sheet.ui.routing.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import fr.rage.lafie.table.games.points.sheet.ui.page.player.round.point.PlayerPointPage
+import fr.rage.lafie.table.games.points.sheet.ui.page.player.point.PlayerPointPage
 import fr.rage.lafie.table.games.points.sheet.ui.routing.PlayerPointRoute
 import java.util.UUID
 

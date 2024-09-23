@@ -1,4 +1,4 @@
-package fr.rage.lafie.table.games.points.sheet.ui.page.player.round.point
+package fr.rage.lafie.table.games.points.sheet.ui.page.player.point
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

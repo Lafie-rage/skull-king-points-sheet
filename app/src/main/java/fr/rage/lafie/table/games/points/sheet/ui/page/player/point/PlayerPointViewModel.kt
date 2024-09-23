@@ -1,4 +1,4 @@
-package fr.rage.lafie.table.games.points.sheet.ui.page.player.round.point
+package fr.rage.lafie.table.games.points.sheet.ui.page.player.point
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -14,7 +14,7 @@ import fr.rage.lafie.table.games.points.sheet.domain.usecase.points.SavePlayerPo
 import fr.rage.lafie.table.games.points.sheet.ui.page.player.choose.PlayerState
 import fr.rage.lafie.table.games.points.sheet.ui.routing.PlayerPointRoute
 import fr.rage.lafie.table.games.points.sheet.utils.Result
-import fr.rage.lafie.table.games.points.sheet.utils.ifSuccess
+import fr.rage.lafie.table.games.points.sheet.utils.doOnNext
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
@@ -54,7 +54,7 @@ class PlayerPointViewModel(
             val playerId = UUID.fromString(routeParams.playerId)
             _player.value = getPlayerUseCase(playerId)
 
-            getPlayerPointsUseCase(playerId).ifSuccess {
+            getPlayerPointsUseCase(playerId).doOnNext {
                 state.value = it
                 _points.value = it.points
             }

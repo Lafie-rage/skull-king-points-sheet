@@ -7,6 +7,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import fr.rage.lafie.table.games.points.sheet.domain.usecase.game.GetGameByMatchIdUseCase
+import fr.rage.lafie.table.games.points.sheet.domain.usecase.round.CreateNewRoundUseCase
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.round.GetRoundsByMatchIdUseCase
 import fr.rage.lafie.table.games.points.sheet.domain.usecase.shared.GetdMatchNameByIdUseCase
 import fr.rage.lafie.table.games.points.sheet.ui.page.round.state.ChooseRoundState
@@ -23,6 +25,8 @@ class ChooseRoundViewModel(
     savedStateHandle: SavedStateHandle,
     private val getRoundsUseCase: GetRoundsByMatchIdUseCase,
     private val getTitleUseCase: GetdMatchNameByIdUseCase,
+    private val createNewRoundUseCase: CreateNewRoundUseCase,
+    private val getGameUseCase: GetGameByMatchIdUseCase,
 ) : ViewModel() {
     private val routeParams: ChooseRoundRoute = savedStateHandle.toRoute()
 
@@ -35,16 +39,26 @@ class ChooseRoundViewModel(
         val matchId = UUID.fromString(routeParams.matchId)
         viewModelScope.launch {
             _state.value = getTitleUseCase(matchId)
-                .zip(getRoundsUseCase(matchId))
-                .map { (title, rounds) ->
+                .zip(
+                    getRoundsUseCase(matchId),
+                    getGameUseCase(matchId)
+                )
+                .map { (title, rounds, game) ->
                     ChooseRoundState(
-                        title,
-                        rounds
+                        title = title,
+                        maxRound = game.maxRounds,
+                        rounds = rounds
                     )
                 }
 
         }
     }
 
+    fun createNewRound() {
+        val matchId = UUID.fromString(routeParams.matchId)
+        viewModelScope.launch {
+            createNewRoundUseCase(matchId)
+        }
+    }
 
 }

@@ -4,13 +4,19 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import fr.rage.lafie.table.games.points.sheet.R
 import fr.rage.lafie.table.games.points.sheet.ui.component.ChooseItemList
 import fr.rage.lafie.table.games.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.table.games.points.sheet.ui.page.round.state.RoundState
@@ -29,10 +35,12 @@ fun ChooseRoundPage(
     state.MapToComposable(
         onSuccess = {
             Page(
-                it.title,
-                it.rounds,
-                onRoundSelected,
-                onBackPressed,
+                title = it.title,
+                maxRound = it.maxRound,
+                rounds = it.rounds,
+                createNewRound = viewModel::createNewRound,
+                navigateToRound = onRoundSelected,
+                onBackPressed = onBackPressed,
             )
         }
     )
@@ -41,8 +49,10 @@ fun ChooseRoundPage(
 @Composable
 private fun Page(
     title: String,
+    maxRound: Int,
     rounds: List<RoundState>,
-    onNavigateToRound: (Int) -> Unit,
+    createNewRound: () -> Unit,
+    navigateToRound: (Int) -> Unit,
     onBackPressed: () -> Unit,
 ) {
     Scaffold(
@@ -51,6 +61,16 @@ private fun Page(
                 title = title,
                 onBackPressed = onBackPressed,
             )
+        },
+        floatingActionButton = {
+            if (maxRound < rounds.size) {
+                FloatingActionButton(onClick = createNewRound) {
+                    Icon(
+                        Icons.Default.Add,
+                        contentDescription = stringResource(R.string.create_new_round)
+                    )
+                }
+            }
         }
     ) { innerPadding ->
         Box(
@@ -62,7 +82,7 @@ private fun Page(
             ChooseItemList(
                 items = rounds.map { it.index },
                 getItemLabel = { it.toString() },
-                onItemSelected = onNavigateToRound,
+                onItemSelected = navigateToRound,
             )
         }
     }
@@ -76,13 +96,17 @@ fun ChooseRoundPagePreview() {
     TableGamesPointsSheetTheme {
         Page(
             title = "Skull King - Match 1",
+            maxRound = 4,
             rounds = listOf(
                 RoundState(1),
                 RoundState(2),
                 RoundState(3),
                 RoundState(4),
             ),
-            onNavigateToRound = { roundIndex ->
+            createNewRound = {
+                Toast.makeText(context, "Create a new round", Toast.LENGTH_LONG).show()
+            },
+            navigateToRound = { roundIndex ->
                 Toast.makeText(context, "Navigate to round $roundIndex", Toast.LENGTH_LONG).show()
             },
             onBackPressed = {
