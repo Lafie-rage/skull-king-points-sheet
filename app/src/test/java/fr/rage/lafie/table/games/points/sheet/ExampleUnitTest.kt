@@ -1,8 +1,7 @@
-package fr.rage.lafie.table.games.points.sheet
+package fr.rage.lafie.skull.king.points.sheet
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).

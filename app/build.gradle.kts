@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "fr.rage.lafie.table.games.points.sheet"
+    namespace = "fr.rage.lafie.skull.king.points.sheet"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "fr.rage.lafie.table.games.points.sheet"
+        applicationId = "fr.rage.lafie.skull.king.points.sheet"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
