@@ -4,11 +4,12 @@ import fr.rage.lafie.skull.king.points.sheet.data.repository.MatchRepository
 import fr.rage.lafie.skull.king.points.sheet.utils.Result
 import fr.rage.lafie.skull.king.points.sheet.utils.flatMap
 import fr.rage.lafie.skull.king.points.sheet.utils.then
-import org.koin.core.annotation.Single
 import java.util.UUID
+import javax.inject.Inject
+import javax.inject.Singleton
 
-@Single
-class CreateNewRoundUseCase(
+@Singleton
+class CreateNewRoundUseCase @Inject constructor(
     val repository: MatchRepository,
 ) {
     suspend operator fun invoke(

@@ -4,14 +4,15 @@ import fr.rage.lafie.skull.king.points.sheet.data.model.Match
 import fr.rage.lafie.skull.king.points.sheet.data.repository.MatchRepository
 import fr.rage.lafie.skull.king.points.sheet.utils.Result
 import fr.rage.lafie.skull.king.points.sheet.utils.map
-import org.koin.core.annotation.Single
 import java.util.UUID
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Retrieve the name of a match using the provided ID.
  */
-@Single
-class GetMatchNameByIdUseCase(
+@Singleton
+class GetMatchNameByIdUseCase @Inject constructor(
     private val repository: MatchRepository,
 ) {
 

@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rage.lafie.skull.king.points.sheet.R
 import fr.rage.lafie.skull.king.points.sheet.ui.component.ChooseItemList
@@ -23,7 +24,6 @@ import fr.rage.lafie.skull.king.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.skull.king.points.sheet.ui.page.match.choose.state.MatchState
 import fr.rage.lafie.skull.king.points.sheet.ui.theme.TableGamesPointsSheetTheme
 import fr.rage.lafie.skull.king.points.sheet.utils.MapToComposable
-import org.koin.compose.viewmodel.koinViewModel
 import java.util.UUID
 
 @Composable
@@ -31,7 +31,7 @@ fun ChooseMatchPage(
     onMatchSelected: (UUID) -> Unit,
     onCreateNewMatchClicked: () -> Unit,
     onBackPressed: () -> Unit,
-    viewModel: ChooseMatchViewModel = koinViewModel(),
+    viewModel: ChooseMatchViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 

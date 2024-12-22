@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.domain.mapper.toState
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.match.GetMatchPlayerListUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.shared.GetGameNameByMatchIdUseCase
@@ -18,11 +19,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
+import javax.inject.Inject
 
-@KoinViewModel
-class ChoosePlayerViewModel(
+@HiltViewModel
+class ChoosePlayerViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getPlayersUseCase: GetMatchPlayerListUseCase,
     private val getMatchNameUseCase: GetMatchNameByIdUseCase,

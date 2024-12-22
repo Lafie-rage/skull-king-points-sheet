@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.game.GetGameByMatchIdUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.match.FinishMatchUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.match.GetMatchStatusUseCase
@@ -19,11 +20,11 @@ import fr.rage.lafie.skull.king.points.sheet.utils.Result
 import fr.rage.lafie.skull.king.points.sheet.utils.map
 import fr.rage.lafie.skull.king.points.sheet.utils.zip
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
+import javax.inject.Inject
 
-@KoinViewModel
-class ChooseRoundViewModel(
+@HiltViewModel
+class ChooseRoundViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getRoundsUseCase: GetRoundsByMatchIdUseCase,
     private val getTitleUseCase: GetMatchNameByIdUseCase,

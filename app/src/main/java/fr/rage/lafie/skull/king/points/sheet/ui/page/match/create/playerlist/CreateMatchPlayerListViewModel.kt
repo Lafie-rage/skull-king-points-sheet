@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.match.SaveMatchUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.shared.GetGameNameByIdUseCase
 import fr.rage.lafie.skull.king.points.sheet.ui.page.match.create.playerlist.state.CreateMatchPlayerListState
@@ -15,11 +16,11 @@ import fr.rage.lafie.skull.king.points.sheet.utils.Result
 import fr.rage.lafie.skull.king.points.sheet.utils.getOrNull
 import fr.rage.lafie.skull.king.points.sheet.utils.map
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
+import javax.inject.Inject
 
-@KoinViewModel
-class CreateMatchPlayerListViewModel(
+@HiltViewModel
+class CreateMatchPlayerListViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val saveMatchUseCase: SaveMatchUseCase,
     private val getGameNameUseCase: GetGameNameByIdUseCase,

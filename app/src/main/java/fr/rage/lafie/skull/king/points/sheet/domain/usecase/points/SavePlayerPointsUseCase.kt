@@ -4,10 +4,11 @@ import fr.rage.lafie.skull.king.points.sheet.data.repository.PlayerPointsReposit
 import fr.rage.lafie.skull.king.points.sheet.domain.mapper.toModel
 import fr.rage.lafie.skull.king.points.sheet.ui.page.player.point.state.PlayerPointsState
 import fr.rage.lafie.skull.king.points.sheet.utils.Result
-import org.koin.core.annotation.Single
+import javax.inject.Inject
+import javax.inject.Singleton
 
-@Single
-class SavePlayerPointsUseCase(
+@Singleton
+class SavePlayerPointsUseCase @Inject constructor(
     private val repository: PlayerPointsRepository,
 ) {
 

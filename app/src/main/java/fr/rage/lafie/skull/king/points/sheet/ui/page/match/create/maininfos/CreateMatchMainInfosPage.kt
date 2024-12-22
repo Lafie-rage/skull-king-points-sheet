@@ -35,17 +35,17 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.R
 import fr.rage.lafie.skull.king.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.skull.king.points.sheet.ui.theme.TableGamesPointsSheetTheme
 import fr.rage.lafie.skull.king.points.sheet.utils.MapToComposable
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CreateMatchMainInfosPage(
     onNavigateToNextPage: (String, Int) -> Unit,
     onBackPressed: () -> Unit,
-    viewModel: CreateMatchMainInfosViewModel = koinViewModel(),
+    viewModel: CreateMatchMainInfosViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state
 

@@ -10,20 +10,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rage.lafie.skull.king.points.sheet.ui.component.ChooseItemList
 import fr.rage.lafie.skull.king.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.skull.king.points.sheet.ui.page.player.choose.state.PlayerState
 import fr.rage.lafie.skull.king.points.sheet.ui.theme.TableGamesPointsSheetTheme
 import fr.rage.lafie.skull.king.points.sheet.utils.MapToComposable
-import org.koin.androidx.compose.koinViewModel
 import java.util.UUID
 
 @Composable
 fun ChoosePlayerPage(
     onNavigateToPlayer: (PlayerState) -> Unit,
     onBackPressed: () -> Unit,
-    viewModel: ChoosePlayerViewModel = koinViewModel(),
+    viewModel: ChoosePlayerViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 

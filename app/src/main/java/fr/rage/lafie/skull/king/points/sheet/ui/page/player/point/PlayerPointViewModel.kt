@@ -8,6 +8,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.player.GetPlayerByIdUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.points.GetPlayerPointsByPlayerIdAndRoundIndexUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.points.SavePlayerPointsUseCase
@@ -17,11 +18,11 @@ import fr.rage.lafie.skull.king.points.sheet.ui.routing.PlayerPointRoute
 import fr.rage.lafie.skull.king.points.sheet.utils.Result
 import fr.rage.lafie.skull.king.points.sheet.utils.doOnNext
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
+import javax.inject.Inject
 
-@KoinViewModel
-class PlayerPointViewModel(
+@HiltViewModel
+class PlayerPointViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getPlayerUseCase: GetPlayerByIdUseCase,
     private val getPlayerPointsUseCase: GetPlayerPointsByPlayerIdAndRoundIndexUseCase,

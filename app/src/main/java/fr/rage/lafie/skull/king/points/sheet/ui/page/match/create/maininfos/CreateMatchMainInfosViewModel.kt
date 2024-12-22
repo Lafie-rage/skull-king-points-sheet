@@ -7,17 +7,18 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.game.GetGameByIdUseCase
 import fr.rage.lafie.skull.king.points.sheet.ui.page.match.create.maininfos.state.CreateMatchMainInfosState
 import fr.rage.lafie.skull.king.points.sheet.ui.routing.CreateMatchRoute
 import fr.rage.lafie.skull.king.points.sheet.utils.Result
 import fr.rage.lafie.skull.king.points.sheet.utils.map
 import kotlinx.coroutines.launch
-import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
+import javax.inject.Inject
 
-@KoinViewModel
-class CreateMatchMainInfosViewModel(
+@HiltViewModel
+class CreateMatchMainInfosViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val useCase: GetGameByIdUseCase,
 ) : ViewModel() {

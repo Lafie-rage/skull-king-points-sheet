@@ -10,11 +10,10 @@ import fr.rage.lafie.skull.king.points.sheet.domain.mapper.toModel
 import fr.rage.lafie.skull.king.points.sheet.utils.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import org.koin.core.annotation.Single
 import java.util.UUID
+import javax.inject.Inject
 
-@Single
-class MatchRepositoryImpl(
+class MatchRepositoryImpl @Inject constructor(
     private val dao: MatchDao,
 ) : MatchRepository {
     // region ADD

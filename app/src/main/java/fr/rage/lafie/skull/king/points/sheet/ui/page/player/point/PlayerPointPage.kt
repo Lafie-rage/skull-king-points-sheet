@@ -21,19 +21,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.R
 import fr.rage.lafie.skull.king.points.sheet.ui.component.PlayerPointKeyboard
 import fr.rage.lafie.skull.king.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.skull.king.points.sheet.ui.page.player.choose.state.PlayerState
 import fr.rage.lafie.skull.king.points.sheet.ui.theme.TableGamesPointsSheetTheme
 import fr.rage.lafie.skull.king.points.sheet.utils.MapToComposable
-import org.koin.compose.viewmodel.koinViewModel
 import java.util.UUID
 
 @Composable
 fun PlayerPointPage(
     onBackPressed: () -> Unit,
-    viewModel: PlayerPointViewModel = koinViewModel(),
+    viewModel: PlayerPointViewModel = hiltViewModel(),
 ) {
 
     val player by viewModel.player

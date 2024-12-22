@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
     alias(libs.plugins.serialization)
 }
 
@@ -56,12 +57,6 @@ android {
             sourceSet.kotlinDirectories.add(File("build/generated/ksp/${variant.name}/kotlin"))
         }
     }
-
-    ksp {
-        // Check koin config at compile time
-        arg("KOIN_CONFIG_CHECK", "true")
-        arg("KOIN_USE_COMPOSE_VIEWMODEL", "true")
-    }
 }
 
 dependencies {
@@ -70,9 +65,9 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.androidx.ui)
 
-    // Koin
-    implementation(libs.bundles.koin)
-    ksp(libs.koin.ksp.compiler)
+    // Hilt
+    implementation(libs.bundles.hilt)
+    ksp(libs.hilt.compiler)
 
     // Room
     implementation(libs.bundles.room)

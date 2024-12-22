@@ -3,11 +3,12 @@ package fr.rage.lafie.skull.king.points.sheet.domain.usecase.player
 import fr.rage.lafie.skull.king.points.sheet.data.model.Player
 import fr.rage.lafie.skull.king.points.sheet.data.repository.PlayerRepository
 import fr.rage.lafie.skull.king.points.sheet.utils.Result
-import org.koin.core.annotation.Single
 import java.util.UUID
+import javax.inject.Inject
+import javax.inject.Singleton
 
-@Single
-class AssociatePlayersToAMatchUseCase(
+@Singleton
+class AssociatePlayersToAMatchUseCase @Inject constructor(
     private val repository: PlayerRepository,
 ) {
     suspend operator fun invoke(

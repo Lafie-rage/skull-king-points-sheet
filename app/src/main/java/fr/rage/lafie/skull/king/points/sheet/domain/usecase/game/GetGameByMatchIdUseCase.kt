@@ -5,11 +5,12 @@ import fr.rage.lafie.skull.king.points.sheet.data.repository.GameRepository
 import fr.rage.lafie.skull.king.points.sheet.data.repository.MatchRepository
 import fr.rage.lafie.skull.king.points.sheet.utils.Result
 import fr.rage.lafie.skull.king.points.sheet.utils.flatMap
-import org.koin.core.annotation.Single
 import java.util.UUID
+import javax.inject.Inject
+import javax.inject.Singleton
 
-@Single
-class GetGameByMatchIdUseCase(
+@Singleton
+class GetGameByMatchIdUseCase @Inject constructor(
     private val gameRepository: GameRepository,
     private val matchRepository: MatchRepository,
 ) {

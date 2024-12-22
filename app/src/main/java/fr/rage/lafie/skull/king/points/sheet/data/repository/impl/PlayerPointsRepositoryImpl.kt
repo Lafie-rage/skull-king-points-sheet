@@ -8,11 +8,10 @@ import fr.rage.lafie.skull.king.points.sheet.data.repository.PlayerPointsReposit
 import fr.rage.lafie.skull.king.points.sheet.domain.mapper.toEntity
 import fr.rage.lafie.skull.king.points.sheet.domain.mapper.toModel
 import fr.rage.lafie.skull.king.points.sheet.utils.Result
-import org.koin.core.annotation.Single
 import java.util.UUID
+import javax.inject.Inject
 
-@Single
-class PlayerPointsRepositoryImpl(
+class PlayerPointsRepositoryImpl @Inject constructor(
     private val dao: PlayerPointsDao,
 ) : PlayerPointsRepository {
 

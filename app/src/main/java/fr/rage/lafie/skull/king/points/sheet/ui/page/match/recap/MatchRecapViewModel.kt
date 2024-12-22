@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.data.model.Player
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.match.GetMatchPlayerListUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.points.GetPlayerPointsByPlayerIdUseCase
@@ -21,11 +22,11 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import org.koin.android.annotation.KoinViewModel
 import java.util.UUID
+import javax.inject.Inject
 
-@KoinViewModel
-class MatchRecapViewModel(
+@HiltViewModel
+class MatchRecapViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getGameNameUseCase: GetGameNameByMatchIdUseCase,
     private val getMatchNameUseCase: GetMatchNameByIdUseCase,

@@ -15,11 +15,12 @@ import fr.rage.lafie.skull.king.points.sheet.utils.isSuccess
 import fr.rage.lafie.skull.king.points.sheet.utils.map
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import org.koin.core.annotation.Single
 import java.util.UUID
+import javax.inject.Inject
+import javax.inject.Singleton
 
-@Single
-class GetMatchesByGameIdUseCase(
+@Singleton
+class GetMatchesByGameIdUseCase @Inject constructor(
     private val gameRepository: GameRepository,
     private val repository: MatchRepository,
     private val playerRepository: PlayerRepository,

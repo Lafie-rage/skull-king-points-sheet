@@ -6,11 +6,12 @@ import fr.rage.lafie.skull.king.points.sheet.domain.mapper.toState
 import fr.rage.lafie.skull.king.points.sheet.ui.page.player.choose.state.PlayerState
 import fr.rage.lafie.skull.king.points.sheet.utils.Result
 import fr.rage.lafie.skull.king.points.sheet.utils.map
-import org.koin.core.annotation.Single
 import java.util.UUID
+import javax.inject.Inject
+import javax.inject.Singleton
 
-@Single
-class GetPlayerByIdUseCase(
+@Singleton
+class GetPlayerByIdUseCase @Inject constructor(
     private val playerRepository: PlayerRepository,
 ) {
 

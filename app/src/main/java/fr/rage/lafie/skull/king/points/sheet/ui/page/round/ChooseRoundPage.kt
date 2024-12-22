@@ -26,20 +26,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.R
 import fr.rage.lafie.skull.king.points.sheet.ui.component.ChooseItemList
 import fr.rage.lafie.skull.king.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.skull.king.points.sheet.ui.page.round.state.RoundState
 import fr.rage.lafie.skull.king.points.sheet.ui.theme.TableGamesPointsSheetTheme
 import fr.rage.lafie.skull.king.points.sheet.utils.MapToComposable
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ChooseRoundPage(
     onRoundSelected: (Int) -> Unit,
     navigateToMatchRecap: () -> Unit,
     onBackPressed: () -> Unit,
-    viewModel: ChooseRoundViewModel = koinViewModel(),
+    viewModel: ChooseRoundViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state
 

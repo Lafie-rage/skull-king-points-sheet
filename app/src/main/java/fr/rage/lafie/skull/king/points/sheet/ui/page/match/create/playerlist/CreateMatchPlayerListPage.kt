@@ -28,18 +28,18 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.R
 import fr.rage.lafie.skull.king.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.skull.king.points.sheet.ui.theme.TableGamesPointsSheetTheme
 import fr.rage.lafie.skull.king.points.sheet.utils.MapToComposable
-import org.koin.androidx.compose.koinViewModel
 import java.util.UUID
 
 @Composable
 fun CreateMatchPlayerListPage(
     onMatchCreated: (UUID) -> Unit,
     onBackPressed: () -> Unit,
-    viewModel: CreateMatchPlayerListViewModel = koinViewModel(),
+    viewModel: CreateMatchPlayerListViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state
 

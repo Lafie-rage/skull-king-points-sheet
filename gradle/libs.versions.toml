@@ -10,10 +10,10 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
 composeBom = "2024.12.01"
-androidx-ui-navigation = "2.8.5"
-# Koin
-koin = "4.0.0-RC1"
-koin-annotations = "1.4.0-RC4"
+androidxUiNavigation = "2.8.5"
+# Hilt
+hilt = "2.52"
+hiltNavigation = "1.2.0"
 # Room
 room = "2.6.1"
 
@@ -25,7 +25,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-ui-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-ui-navigation" }
+androidx-ui-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxUiNavigation" }
 androidx-ui-core = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
@@ -34,11 +34,10 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-# Koin
-koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin-annotations" }
-koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
-koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
-koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koin-annotations" }
+# Hilt
+hilt-core = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 # Room
 room-core = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
@@ -48,7 +47,7 @@ serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization
 
 [bundles]
 androidx-ui = ["androidx-ui-core", "androidx-ui-navigation", "androidx-ui-graphics", "androidx-ui-tooling", "androidx-ui-tooling-preview", "androidx-ui-test-manifest", "androidx-material3", "androidx-activity-compose", "androidx-lifecycle-runtime-ktx", "androidx-compose-icons-extended"]
-koin = ["koin-annotations", "koin-compose-viewmodel", "koin-compose"]
+hilt = ["hilt-core", "hilt-navigation"]
 room = ["room-core", "room-ktx"]
 
 [plugins]
@@ -57,5 +56,6 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 # Due to kotlin 2.0.0+
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
