@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.room)
 }
 
 android {
@@ -56,6 +57,10 @@ android {
         variant.sourceSets.forEach { sourceSet ->
             sourceSet.kotlinDirectories.add(File("build/generated/ksp/${variant.name}/kotlin"))
         }
+    }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
     }
 }
 

@@ -21,7 +21,7 @@ import fr.rage.lafie.skull.king.points.sheet.data.database.entity.PlayerPointsEn
         PlayerPointsEntity::class,
     ],
     version = 1,
-    exportSchema = false,
+    exportSchema = true,
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
