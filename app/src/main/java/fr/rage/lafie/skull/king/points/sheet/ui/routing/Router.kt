@@ -21,9 +21,7 @@ fun Router() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = ChooseMatchRoute(
-            "2c3466fc-d033-460f-9020-5d89cbfc2c55",
-        ),
+        startDestination = ChooseMatchRoute
     ) {
         createMatchNavigation(
             navigateToCreateMatchPlayerListPage = navController::navigateToCreateMatchPlayerListPage,

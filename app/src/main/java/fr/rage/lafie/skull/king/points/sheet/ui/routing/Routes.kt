@@ -3,29 +3,17 @@ package fr.rage.lafie.skull.king.points.sheet.ui.routing
 import kotlinx.serialization.Serializable
 
 // FIXME Once Compose navigation safe args library supports parameters annotated with @Serializable(with=...), migrate Strings to UUIDs
+@Serializable
+object ChooseMatchRoute
 
 @Serializable
-object HomeRoute
-
-@Serializable
-object CreateGameRoute
-
-@Serializable
-data class ChooseMatchRoute(
-    val gameId: String,
-)
-
-@Serializable
-data class CreateMatchRoute(
-    val gameId: String,
-)
+object CreateMatchRoute
 
 @Serializable
 object CreateMatchMainInfosRoute
 
 @Serializable
 data class CreateMatchPlayerListRoute(
-    val gameId: String,
     val matchName: String,
     val playersCount: Int,
 )

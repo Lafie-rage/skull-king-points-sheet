@@ -16,14 +16,12 @@ class SaveMatchUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(
         id: UUID,
-        gameId: UUID,
         name: String,
         playersName: List<String>,
     ): Result<Unit> {
         return matchRepository.createOrUpdate(
             Match(
                 id = id,
-                gameId = gameId,
                 name = name,
                 roundCounter = 1,
                 isFinished = false,

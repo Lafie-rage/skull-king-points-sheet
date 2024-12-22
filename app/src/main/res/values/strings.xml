@@ -9,7 +9,7 @@
     <string name="increase_points">Increase points</string>
     <string name="decrease_points">Decrease points</string>
     <string name="round_with_index">Round %1$d</string>
-    <string name="choose_match_page_title">%1$s matches\' history</string>
+    <string name="choose_match_page_title">Matches history</string>
     <string name="create_new_match">Create a new match</string>
     <string name="create_new_round">Create a new round</string>
     <string name="cannot_add_more_player">You can\'t add more than 20 players.</string>
@@ -18,8 +18,15 @@
     <string name="match_name">Match name</string>
     <string name="decrease_players_count">Decrease players count</string>
     <string name="increase_players_count">Increase players count</string>
-    <string name="cannot_have_more_than_X_players">A match can\'t have more than %1$d players</string>
-    <string name="cannot_have_less_than_X_players">A match can\'t have less than %1$d player(s)</string>
+    <plurals name="cannot_have_more_than_X_players">
+        <item quantity="one">A match can\'t have more than %1$d player</item>
+        <item quantity="other">A match can\'t have more than %1$d players</item>
+    </plurals>
+    <plurals name="cannot_have_less_than_X_players">
+        <item quantity="zero">A match should have at least one player</item>
+        <item quantity="one">A match should have at least %1$d player</item>
+        <item quantity="other">A match should have at least %1$d players</item>
+    </plurals>
     <string name="next">Next</string>
     <string name="player_X_name">Player %1$d\'s name</string>
     <string name="show_more_actions">Show more actions</string>

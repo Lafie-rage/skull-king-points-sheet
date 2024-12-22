@@ -32,6 +32,7 @@ import fr.rage.lafie.skull.king.points.sheet.ui.component.ChooseItemList
 import fr.rage.lafie.skull.king.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.skull.king.points.sheet.ui.page.round.state.RoundState
 import fr.rage.lafie.skull.king.points.sheet.ui.theme.TableGamesPointsSheetTheme
+import fr.rage.lafie.skull.king.points.sheet.utils.MAX_ROUNDS
 import fr.rage.lafie.skull.king.points.sheet.utils.MapToComposable
 
 @Composable
@@ -47,7 +48,6 @@ fun ChooseRoundPage(
         onSuccess = {
             Page(
                 title = it.title,
-                maxRound = it.maxRound,
                 isMatchFinished = it.isMatchFinished,
                 rounds = it.rounds,
                 createNewRound = viewModel::createNewRound,
@@ -63,7 +63,6 @@ fun ChooseRoundPage(
 @Composable
 private fun Page(
     title: String,
-    maxRound: Int,
     isMatchFinished: Boolean,
     rounds: List<RoundState>,
     createNewRound: () -> Unit,
@@ -86,7 +85,7 @@ private fun Page(
             )
         },
         floatingActionButton = {
-            if (maxRound > rounds.size && !isMatchFinished) {
+            if (MAX_ROUNDS > rounds.size && !isMatchFinished) {
                 FloatingActionButton(onClick = createNewRound) {
                     Icon(
                         Icons.Default.Add,
@@ -164,7 +163,6 @@ fun ChooseRoundPagePreview() {
     TableGamesPointsSheetTheme {
         Page(
             title = "Skull King - Match 1",
-            maxRound = 4,
             isMatchFinished = false,
             rounds = listOf(
                 RoundState(1),

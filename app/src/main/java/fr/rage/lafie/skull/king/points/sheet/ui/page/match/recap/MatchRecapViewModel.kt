@@ -8,7 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.data.model.Player
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.match.GetMatchPlayerListUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.points.GetPlayerPointsByPlayerIdUseCase
-import fr.rage.lafie.skull.king.points.sheet.domain.usecase.shared.GetGameNameByMatchIdUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.shared.GetMatchNameByIdUseCase
 import fr.rage.lafie.skull.king.points.sheet.ui.page.match.recap.state.MatchRecapState
 import fr.rage.lafie.skull.king.points.sheet.ui.page.match.recap.state.PlayerAndScoreState
@@ -28,7 +27,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MatchRecapViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getGameNameUseCase: GetGameNameByMatchIdUseCase,
     private val getMatchNameUseCase: GetMatchNameByIdUseCase,
     private val getPlayersUseCase: GetMatchPlayerListUseCase,
     private val getPlayerPointsUseCase: GetPlayerPointsByPlayerIdUseCase
@@ -42,7 +40,8 @@ class MatchRecapViewModel @Inject constructor(
         return getPlayersUseCase(matchId)
             .map { playersResult ->
                 playersResult.flatMap { players ->
-                    getPlayerPoints(players).zip(getTitle(matchId))
+                    getPlayerPoints(players)
+                        .zip(getTitle(matchId))
                         .map { (players, title) ->
                             MatchRecapState(
                                 players = players,
@@ -76,7 +75,5 @@ class MatchRecapViewModel @Inject constructor(
 
     private suspend fun getTitle(matchId: UUID): Result<String> {
         return getMatchNameUseCase.invoke(matchId)
-            .zip(getGameNameUseCase(matchId))
-            .map { (matchName, gameName) -> "$gameName - $matchName" }
     }
 }

@@ -11,7 +11,7 @@ interface MatchRepository {
     // endregion
 
     // region GET
-    fun getAllByGameId(gameId: UUID): Flow<Result<List<Match>>>
+    fun getAll(): Flow<Result<List<Match>>>
 
     suspend fun getById(id: UUID): Result<Match>
     // endregion

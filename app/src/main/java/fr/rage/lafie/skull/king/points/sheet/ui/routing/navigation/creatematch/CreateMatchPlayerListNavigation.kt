@@ -23,10 +23,8 @@ fun NavController.navigateToCreateMatchPlayerListPage(
     matchName: String,
     playersCount: Int,
 ) {
-    val gameId = this.currentBackStackEntry!!.arguments!!.getString("gameId")!!
     navigate(
         CreateMatchPlayerListRoute(
-            gameId = gameId,
             matchName = matchName,
             playersCount = playersCount,
         )

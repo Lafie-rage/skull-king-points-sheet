@@ -36,13 +36,12 @@ fun NavGraphBuilder.chooseRoundNavigation(
 fun NavController.navigateToChooseRoundPage(
     matchId: UUID,
 ) {
-    val gameId = this.currentBackStackEntry!!.arguments!!.getString("gameId")!!
     navigate(
         ChooseRoundRoute(
             matchId = matchId.toString(),
         )
     ) {
-        popUpTo(ChooseMatchRoute(gameId)) {
+        popUpTo(ChooseMatchRoute) {
             inclusive = true
         }
     }

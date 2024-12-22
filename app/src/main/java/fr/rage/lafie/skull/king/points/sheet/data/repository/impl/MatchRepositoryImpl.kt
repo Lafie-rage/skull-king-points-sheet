@@ -24,11 +24,10 @@ class MatchRepositoryImpl @Inject constructor(
     // endregion
 
     // region GET
-    override fun getAllByGameId(gameId: UUID): Flow<Result<List<Match>>> =
-        dao.getAllByGameId(gameId)
-            .map { matches ->
-                Result.Success(matches.toModel())
-            }
+    override fun getAll(): Flow<Result<List<Match>>> =
+        dao.getAllByGameId().map { matches ->
+            Result.Success(matches.toModel())
+        }
 
     override suspend fun getById(id: UUID): Result<Match> = dao.getById(id)?.let {
         Result.Success(it.toModel())

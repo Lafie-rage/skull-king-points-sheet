@@ -7,7 +7,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import fr.rage.lafie.skull.king.points.sheet.data.database.AppDatabase
-import fr.rage.lafie.skull.king.points.sheet.data.database.dao.GameDao
 import fr.rage.lafie.skull.king.points.sheet.data.database.dao.MatchDao
 import fr.rage.lafie.skull.king.points.sheet.data.database.dao.PlayerDao
 import fr.rage.lafie.skull.king.points.sheet.data.database.dao.PlayerPointsDao
@@ -25,12 +24,6 @@ object DatabaseModule {
             AppDatabase::class.java,
             "database.db"
         ).build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideGameDao(database: AppDatabase): GameDao {
-        return database.getGameDao()
     }
 
     @Singleton

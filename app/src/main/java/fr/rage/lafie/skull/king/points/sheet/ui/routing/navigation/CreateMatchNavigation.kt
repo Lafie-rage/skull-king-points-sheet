@@ -27,12 +27,6 @@ fun NavGraphBuilder.createMatchNavigation(
     }
 }
 
-fun NavController.navigateToCreateMatchPage(
-    gameId: UUID,
-) {
-    navigate(
-        CreateMatchRoute(
-            gameId = gameId.toString(),
-        )
-    )
+fun NavController.navigateToCreateMatchPage() {
+    navigate(CreateMatchRoute)
 }

@@ -32,7 +32,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.R
 import fr.rage.lafie.skull.king.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.skull.king.points.sheet.ui.theme.TableGamesPointsSheetTheme
-import fr.rage.lafie.skull.king.points.sheet.utils.MapToComposable
 import java.util.UUID
 
 @Composable
@@ -43,20 +42,18 @@ fun CreateMatchPlayerListPage(
 ) {
     val state by viewModel.state
 
-    state.MapToComposable(
-        onSuccess = { (title, matchId, playersName) ->
-            Page(
-                title = title,
-                playersName = playersName,
-                onChangePlayerName = viewModel::changePlayerName,
-                onValidateMatch = {
-                    viewModel.saveMatch()
-                    onMatchCreated(matchId)
-                },
-                onBackPressed = onBackPressed,
-            )
-        }
-    )
+    state.let { (title, matchId, playersName) ->
+        Page(
+            title = title,
+            playersName = playersName,
+            onChangePlayerName = viewModel::changePlayerName,
+            onValidateMatch = {
+                viewModel.saveMatch()
+                onMatchCreated(matchId)
+            },
+            onBackPressed = onBackPressed,
+        )
+    }
 }
 
 @Composable

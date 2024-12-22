@@ -19,7 +19,7 @@ interface MatchDao {
     @Query("SELECT * FROM `match` WHERE id = :id")
     suspend fun getById(id: UUID): MatchEntity?
 
-    @Query("SELECT * FROM `match` WHERE gameId = :gameId")
-    fun getAllByGameId(gameId: UUID): Flow<List<MatchEntity>>
+    @Query("SELECT * FROM `match`")
+    fun getAllByGameId(): Flow<List<MatchEntity>>
     // endregion
 }

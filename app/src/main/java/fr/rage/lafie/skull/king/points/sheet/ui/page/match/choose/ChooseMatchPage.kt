@@ -36,9 +36,8 @@ fun ChooseMatchPage(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     state.MapToComposable(
-        onSuccess = { (gameName, matches) ->
+        onSuccess = { (matches) ->
             Page(
-                gameName = gameName,
                 matches = matches,
                 onNavigateToMatch = onMatchSelected,
                 onCreateNewMatchClicked = onCreateNewMatchClicked,
@@ -50,7 +49,6 @@ fun ChooseMatchPage(
 
 @Composable
 private fun Page(
-    gameName: String,
     matches: List<MatchState>,
     onNavigateToMatch: (UUID) -> Unit,
     onCreateNewMatchClicked: () -> Unit,
@@ -59,7 +57,7 @@ private fun Page(
     Scaffold(
         topBar = {
             AppBar(
-                title = stringResource(R.string.choose_match_page_title, gameName),
+                title = stringResource(R.string.choose_match_page_title, ),
                 onBackPressed = onBackPressed,
             )
         },
@@ -99,7 +97,6 @@ fun ChooseMatchPagePreview() {
 
     TableGamesPointsSheetTheme {
         Page(
-            gameName = "Skull King",
             matches = listOf(
                 MatchState(
                     id = UUID.randomUUID(),

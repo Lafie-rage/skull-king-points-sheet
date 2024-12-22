@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -39,7 +40,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.R
 import fr.rage.lafie.skull.king.points.sheet.ui.component.core.appbar.AppBar
 import fr.rage.lafie.skull.king.points.sheet.ui.theme.TableGamesPointsSheetTheme
-import fr.rage.lafie.skull.king.points.sheet.utils.MapToComposable
+import fr.rage.lafie.skull.king.points.sheet.utils.MAX_PLAYER
+import fr.rage.lafie.skull.king.points.sheet.utils.MIN_PLAYER
 
 @Composable
 fun CreateMatchMainInfosPage(
@@ -49,31 +51,27 @@ fun CreateMatchMainInfosPage(
 ) {
     val state by viewModel.state
 
-    state.MapToComposable(onSuccess = {
+    state.let { (matchName) ->
         Page(
-            matchName = it.matchName,
-            minPlayers = it.minPlayers,
-            maxPlayers = it.maxPlayers,
+            matchName = matchName,
             onMatchNameChanged = viewModel::changeMatchName,
             onNextButtonClicked = onNavigateToNextPage,
             onBackPressed = onBackPressed,
         )
-    })
+    }
 }
 
 @Composable
 private fun Page(
     matchName: String,
-    minPlayers: Int,
-    maxPlayers: Int,
     onMatchNameChanged: (String) -> Unit,
     onNextButtonClicked: (String, Int) -> Unit,
     onBackPressed: () -> Unit,
 ) {
-    var playersCountValue by remember { mutableStateOf(minPlayers.toString()) }
+    var playersCountValue by remember { mutableStateOf(MAX_PLAYER.toString()) }
     val playersCount = playersCountValue.toIntOrNull() ?: 0
-    val isPlayersCountAboveMax = playersCount > maxPlayers
-    val isPlayersCountUnderMin = playersCount < minPlayers
+    val isPlayersCountAboveMax = playersCount > MAX_PLAYER
+    val isPlayersCountUnderMin = playersCount < MIN_PLAYER
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Scaffold(topBar = {
@@ -110,7 +108,7 @@ private fun Page(
                 ) {
                     OutlinedIconButton(
                         onClick = { playersCountValue = (playersCount - 1).toString() },
-                        enabled = playersCount > minPlayers,
+                        enabled = playersCount > MIN_PLAYER,
                     ) {
                         Icon(
                             imageVector = Icons.Default.Remove,
@@ -136,22 +134,26 @@ private fun Page(
                         supportingText = {
                             if (isPlayersCountUnderMin) {
                                 Text(
-                                    stringResource(
-                                        R.string.cannot_have_less_than_X_players, minPlayers
+                                    pluralStringResource(
+                                        R.plurals.cannot_have_less_than_X_players,
+                                        MIN_PLAYER,
+                                        MIN_PLAYER
                                     )
                                 )
                             }
                             if (isPlayersCountAboveMax) {
                                 Text(
-                                    stringResource(
-                                        R.string.cannot_have_more_than_X_players, maxPlayers
+                                    pluralStringResource(
+                                        R.plurals.cannot_have_more_than_X_players,
+                                        MAX_PLAYER,
+                                        MAX_PLAYER
                                     )
                                 )
                             }
                         })
                     OutlinedIconButton(
                         onClick = { playersCountValue = (playersCount + 1).toString() },
-                        enabled = playersCount < maxPlayers,
+                        enabled = playersCount < MAX_PLAYER,
                     ) {
                         Icon(
                             imageVector = Icons.Default.Add,
@@ -184,8 +186,6 @@ fun CreateMatchMainInfosPagePreview() {
     TableGamesPointsSheetTheme {
         Page(
             matchName = matchName,
-            minPlayers = 1,
-            maxPlayers = 8,
             onMatchNameChanged = { value -> matchName = value },
             onNextButtonClicked = { _, _ ->
                 Toast.makeText(context, "Navigate to next page", Toast.LENGTH_LONG).show()

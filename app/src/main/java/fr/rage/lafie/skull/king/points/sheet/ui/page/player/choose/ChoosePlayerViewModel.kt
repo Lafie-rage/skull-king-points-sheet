@@ -7,7 +7,6 @@ import androidx.navigation.toRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.rage.lafie.skull.king.points.sheet.domain.mapper.toState
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.match.GetMatchPlayerListUseCase
-import fr.rage.lafie.skull.king.points.sheet.domain.usecase.shared.GetGameNameByMatchIdUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.shared.GetMatchNameByIdUseCase
 import fr.rage.lafie.skull.king.points.sheet.ui.page.player.choose.state.ChoosePlayerState
 import fr.rage.lafie.skull.king.points.sheet.ui.routing.ChoosePlayerRoute
@@ -27,7 +26,6 @@ class ChoosePlayerViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getPlayersUseCase: GetMatchPlayerListUseCase,
     private val getMatchNameUseCase: GetMatchNameByIdUseCase,
-    private val getGameNameUseCase: GetGameNameByMatchIdUseCase,
 ) : ViewModel() {
 
     private val routeParams: ChoosePlayerRoute = savedStateHandle.toRoute()
@@ -41,10 +39,7 @@ class ChoosePlayerViewModel @Inject constructor(
             .filterNotNull()
             .map { rounds ->
                 getMatchNameUseCase(matchId)
-                    .zip(getGameNameUseCase(matchId))
-                    .map { (matchName, gameName) ->
-                        "$gameName - $matchName"
-                    }.zip(rounds)
+                    .zip(rounds)
                     .map { (title, players) ->
                         ChoosePlayerState(
                             title = title,

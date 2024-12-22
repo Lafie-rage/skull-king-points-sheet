@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
-import fr.rage.lafie.skull.king.points.sheet.domain.usecase.game.GetGameByMatchIdUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.match.FinishMatchUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.match.GetMatchStatusUseCase
 import fr.rage.lafie.skull.king.points.sheet.domain.usecase.round.CreateNewRoundUseCase
@@ -29,7 +28,6 @@ class ChooseRoundViewModel @Inject constructor(
     private val getRoundsUseCase: GetRoundsByMatchIdUseCase,
     private val getTitleUseCase: GetMatchNameByIdUseCase,
     private val createNewRoundUseCase: CreateNewRoundUseCase,
-    private val getGameUseCase: GetGameByMatchIdUseCase,
     private val getMatchStatusUseCase: GetMatchStatusUseCase,
     private val finishMatchUseCase: FinishMatchUseCase,
 ) : ViewModel() {
@@ -46,16 +44,14 @@ class ChooseRoundViewModel @Inject constructor(
             _state.value = getTitleUseCase(matchId)
                 .zip(
                     getRoundsUseCase(matchId),
-                    getGameUseCase(matchId),
                 )
                 .zip(
                     getMatchStatusUseCase(matchId)
                 )
                 .map { (triple, isMatchFinished) ->
-                    val (title, rounds, game) = triple
+                    val (title, rounds) = triple
                     ChooseRoundState(
                         title = title,
-                        maxRound = game.maxRounds,
                         isMatchFinished = isMatchFinished,
                         rounds = rounds
                     )

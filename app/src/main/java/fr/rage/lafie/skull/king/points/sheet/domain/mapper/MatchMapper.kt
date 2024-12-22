@@ -7,7 +7,6 @@ import fr.rage.lafie.skull.king.points.sheet.ui.page.match.choose.state.MatchSta
 // region ENTITY -> MODEL
 fun MatchEntity.toModel() = Match(
     id = id,
-    gameId = gameId,
     name = name,
     roundCounter = roundCounter,
     isFinished = isFinished,
@@ -29,7 +28,6 @@ fun List<Match>.toState() = this.map(Match::toState)
 // region MODEL -> ENTITY
 fun Match.toEntity() = MatchEntity(
     id = id,
-    gameId = gameId,
     name = name,
     roundCounter = roundCounter,
     isFinished = isFinished,
