@@ -6,14 +6,14 @@ import java.util.UUID
 class Converters {
 
     @TypeConverter
-    fun fromUUID(value: String?): UUID? {
+    fun toUUID(value: String?): UUID? {
         return value?.let { uuid ->
             UUID.fromString(uuid)
         }
     }
 
     @TypeConverter
-    fun toUUID(uuid: UUID?): String? {
+    fun fromUUID(uuid: UUID?): String? {
         return uuid?.toString()
     }
 }
