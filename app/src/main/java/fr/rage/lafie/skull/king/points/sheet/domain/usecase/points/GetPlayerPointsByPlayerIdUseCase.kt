@@ -15,5 +15,5 @@ class GetPlayerPointsByPlayerIdUseCase @Inject constructor(
     private val repository: PlayerPointsRepository,
 ) {
     suspend operator fun invoke(playerId: UUID): Result<List<PlayerPointsState>> =
-        repository.getByPlayerId(playerId).map { result -> result.map(PlayerPoints::toState) }
+        repository.getByPlayerId(playerId).map(List<PlayerPoints>::toState)
 }
