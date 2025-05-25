@@ -18,7 +18,11 @@ class MatchRepositoryImpl @Inject constructor(
 ) : MatchRepository {
     // region ADD
     override suspend fun createOrUpdate(match: Match): Result<Match> {
-        dao.upsert(match.toEntity())
+        when (val searchResult = getById(match.id)) {
+            is Result.Success -> dao.update(match.toEntity())
+            is Result.Error -> if (searchResult.exception is EntityNotFoundById) dao.insert(match.toEntity())
+            else -> return searchResult
+        }
         return getById(match.id)
     }
     // endregion
