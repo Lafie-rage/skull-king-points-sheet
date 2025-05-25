@@ -3,17 +3,19 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.room)
 }
 
 android {
-    namespace = "fr.rage.lafie.table.games.points.sheet"
-    compileSdk = 34
+    namespace = "fr.rage.lafie.skull.king.points.sheet"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "fr.rage.lafie.table.games.points.sheet"
+        applicationId = "fr.rage.lafie.skull.king.points.sheet"
         minSdk = 28
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -57,10 +59,8 @@ android {
         }
     }
 
-    ksp {
-        // Check koin config at compile time
-        arg("KOIN_CONFIG_CHECK", "true")
-        arg("KOIN_USE_COMPOSE_VIEWMODEL", "true")
+    room {
+        schemaDirectory("$projectDir/schemas")
     }
 }
 
@@ -70,9 +70,9 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.androidx.ui)
 
-    // Koin
-    implementation(libs.bundles.koin)
-    ksp(libs.koin.ksp.compiler)
+    // Hilt
+    implementation(libs.bundles.hilt)
+    ksp(libs.hilt.compiler)
 
     // Room
     implementation(libs.bundles.room)
@@ -82,6 +82,7 @@ dependencies {
     implementation(libs.serialization)
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

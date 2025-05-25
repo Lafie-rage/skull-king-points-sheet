@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Table Games Points Sheet"
+rootProject.name = "Skull King's Points Sheet"
 include(":app")
