@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+.idea/**/*.xml
+.idea/.name
+.idea/.gitignore
+
+.kotlin/errors/**/*
